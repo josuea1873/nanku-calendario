@@ -265,7 +265,10 @@
     flex-direction: column;
     gap: 6px;
   }
+  .cal-day { transition: all 0.2s ease, transform 0.15s ease; }
   .cal-day:hover:not(.other-month) { border-color: #3a3a3a; background: var(--color-bg-elevated); }
+  .cal-day:hover:not(.other-month):not(.past) { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,107,43,0.08); }
+  .cal-day.today:hover { box-shadow: 0 4px 20px rgba(255,107,43,0.2); }
   .cal-day.other-month { opacity: 0.3; cursor: default; }
   .cal-day.other-month:hover { border-color: var(--color-border); background: var(--color-bg-card); }
   .cal-day.today { border-color: var(--color-accent) !important; }
@@ -794,7 +797,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-border);
+    color: #444;
     font-family: var(--font-mono);
     font-size: 10px;
     flex: 1;
@@ -839,7 +842,7 @@
 
   /* ─── PAST DAYS ──────────────────────────────────────────── */
   .cal-day.past {
-    opacity: 0.35;
+    opacity: 0.55;
     background: repeating-linear-gradient(
       135deg,
       transparent,
@@ -1033,6 +1036,226 @@
     gap: 5px;
   }
 
+  /* ─── CAMPAÑAS ───────────────────────────────────────────── */
+  .campanas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0 24px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .campanas-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .btn-nueva-campana {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    background: var(--color-accent);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+  }
+  .btn-nueva-campana:hover { background: var(--color-fire); }
+  .camp-form {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    padding: 24px;
+    margin-bottom: 28px;
+    display: none;
+  }
+  .camp-form.open { display: block; }
+  .camp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .camp-field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .camp-input {
+    width: 100%;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .camp-input:focus { border-color: var(--color-accent); }
+  .camp-form-actions { display: flex; gap: 10px; }
+  .btn-guardar-camp {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 9px 20px;
+    background: var(--color-success);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-cancelar-camp {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 9px 20px;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+  }
+  .camp-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    margin-bottom: 28px;
+  }
+  .camp-summary-item {
+    background: var(--color-bg-card);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .camp-summary-val {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .camp-summary-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .camp-table { width: 100%; border-collapse: collapse; }
+  .camp-table th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .camp-table td {
+    font-size: 13px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+  }
+  .camp-table tr:hover td { background: var(--color-bg-elevated); }
+  .camp-metric { font-family: var(--font-mono); font-size: 12px; }
+  .camp-metric.good { color: var(--color-success); }
+  .camp-metric.warn { color: #f0a500; }
+  .camp-empty {
+    padding: 60px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+  .btn-del-camp {
+    background: transparent;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+    font-size: 11px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+  }
+  .btn-del-camp:hover { background: #c0392b; color: #fff; }
+
+  /* ─── PAUTA SECTION ──────────────────────────────────────── */
+  .pauta-section {
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .pauta-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--color-bg-elevated);
+    gap: 12px;
+  }
+  .pauta-toggle-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 7px 14px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .pauta-toggle-btn.active { background: rgba(255,107,43,0.12); border-color: var(--color-accent); color: var(--color-accent); }
+  .pauta-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px;
+    background: var(--color-bg-card);
+  }
+  .pauta-field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .pauta-input {
+    width: 100%;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 7px 10px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .pauta-input:focus { border-color: var(--color-accent); }
+
+  @media (max-width: 700px) {
+    .camp-form-grid { grid-template-columns: 1fr; }
+    .camp-summary { grid-template-columns: repeat(2, 1fr); }
+    .pauta-fields { grid-template-columns: 1fr 1fr; }
+  }
+
   /* ─── IMPROVED LIST RESPONSIVE ───────────────────────────── */
   @media (max-width: 1100px) {
     .list-item { grid-template-columns: 130px 90px 110px 1fr 72px; }
@@ -1149,6 +1372,19 @@
     .posdata-foot { padding: 12px 16px; }
   }
 
+  /* ─── CURSOR GLOW ─────────────────────────────────────────── */
+  .cursor-glow {
+    pointer-events: none;
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+  }
+
 </style>
 </head>
 <body>
@@ -1171,6 +1407,7 @@
           <button class="view-tab active" data-view="calendario">Calendario</button>
           <button class="view-tab" data-view="lista">Lista</button>
           <button class="view-tab" data-view="pilares">Pilares</button>
+          <button class="view-tab" data-view="campanas">Campañas</button>
         </div>
       </div>
     </div>
@@ -1276,6 +1513,11 @@
   <!-- PILARES VIEW -->
   <div class="view" id="view-pilares">
     <div class="pilares-grid" id="pilaresGrid"></div>
+  </div>
+
+  <!-- CAMPAÑAS VIEW -->
+  <div class="view" id="view-campanas">
+    <div id="campanasView"></div>
   </div>
 
   <!-- POSDATA ESTRATÉGICA -->
@@ -1659,11 +1901,50 @@ let state = {
     pillars: new Set(),
     status: 'all'
   },
-  postStatuses: {}
+  postStatuses: {},
+  postEdits: {},
+  campaigns: []
 };
 
-// Initialize statuses from data
+// ─── PERSISTENCIA localStorage ───────────────────────────────────────────────
+const LS_STATUSES  = 'nanku-cal-statuses';
+const LS_EDITS     = 'nanku-cal-edits';
+const LS_CAMPAIGNS = 'nanku-cal-campaigns';
+
+function persistState() {
+  try {
+    localStorage.setItem(LS_STATUSES,  JSON.stringify(state.postStatuses));
+    localStorage.setItem(LS_EDITS,     JSON.stringify(state.postEdits));
+    localStorage.setItem(LS_CAMPAIGNS, JSON.stringify(state.campaigns));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const savedStatuses  = localStorage.getItem(LS_STATUSES);
+    const savedEdits     = localStorage.getItem(LS_EDITS);
+    const savedCampaigns = localStorage.getItem(LS_CAMPAIGNS);
+    if (savedStatuses)  state.postStatuses = JSON.parse(savedStatuses);
+    if (savedEdits)     state.postEdits    = JSON.parse(savedEdits);
+    if (savedCampaigns) state.campaigns    = JSON.parse(savedCampaigns);
+  } catch(e) {}
+}
+
+// Initialize statuses from data (default) then load from localStorage
 posts.forEach(p => { state.postStatuses[p.id] = p.status; });
+loadState();
+
+// Apply saved edits to posts array so renders use edited content
+posts.forEach(p => {
+  const e = state.postEdits[p.id];
+  if (!e) return;
+  if (e.hook)            p.hook            = e.hook;
+  if (e.captionES)       p.captionES       = e.captionES;
+  if (e.captionEN)       p.captionEN       = e.captionEN;
+  if (e.cta)             p.cta             = e.cta;
+  if (e.engagement)      p.engagement      = e.engagement;
+  if (e.productionNotes) p.productionNotes = e.productionNotes;
+});
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function getPostsByDate(date) {
@@ -1754,8 +2035,11 @@ function buildCalendar() {
   const grid = document.getElementById('calGrid');
   grid.innerHTML = '';
 
-  const TODAY    = '2026-05-04';
-  const TOMORROW = '2026-05-05';
+  const now = new Date();
+  const todayStr = s => s < 10 ? '0'+s : ''+s;
+  const TODAY    = `${now.getFullYear()}-${todayStr(now.getMonth()+1)}-${todayStr(now.getDate())}`;
+  const tmr      = new Date(now.getTime() + 86400000);
+  const TOMORROW = `${tmr.getFullYear()}-${todayStr(tmr.getMonth()+1)}-${todayStr(tmr.getDate())}`;
 
   // Grid starts Mon Apr 27
   const cells = [];
@@ -1878,6 +2162,7 @@ function buildList() {
         const current = state.postStatuses[id];
         // Toggle: click same button again → back to pending
         state.postStatuses[id] = (current === action) ? 'pending' : action;
+        persistState();
         renderViews();
       });
     });
@@ -1931,6 +2216,162 @@ function buildPilares() {
       `;
       item.addEventListener('click', () => openModal(p.date, p.id));
       postsContainer.appendChild(item);
+    });
+  });
+}
+
+// ─── CAMPAÑAS VIEW ───────────────────────────────────────────────────────────
+function buildCampanas() {
+  const container = document.getElementById('campanasView');
+  if (!container) return;
+
+  const camps = state.campaigns;
+
+  // Summary metrics
+  const totalBudget   = camps.reduce((s, c) => s + (parseFloat(c.presupuesto) || 0), 0);
+  const totalAlcance  = camps.reduce((s, c) => s + (parseInt(c.alcance) || 0), 0);
+  const totalRes      = camps.reduce((s, c) => s + (parseInt(c.resultados) || 0), 0);
+  const avgCtr        = camps.length ? (camps.reduce((s, c) => s + (parseFloat(c.ctr) || 0), 0) / camps.length).toFixed(2) : '0.00';
+
+  container.innerHTML = `
+    <div class="campanas-header">
+      <div>
+        <div class="campanas-title">Campañas & Resultados</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--color-text-muted);margin-top:4px;">Mayo 2026 · Inversión publicitaria pagada</div>
+      </div>
+      <button class="btn-nueva-campana" id="btnNuevaCamp">+ Nueva campaña</button>
+    </div>
+
+    <div class="camp-form" id="campForm">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Nueva campaña publicitaria</div>
+      <div class="camp-form-grid">
+        <div class="camp-field"><label>Nombre de campaña</label><input class="camp-input" id="cf-nombre" placeholder="Ej: Steak Fire — Semana 2"></div>
+        <div class="camp-field"><label>Plataforma</label>
+          <select class="camp-input" id="cf-plat">
+            <option value="Meta Ads">Meta Ads (Instagram/Facebook)</option>
+            <option value="TikTok Ads">TikTok Ads</option>
+            <option value="Google Ads">Google Ads</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="camp-field"><label>Post asociado</label>
+          <select class="camp-input" id="cf-post">
+            <option value="">— Ninguno —</option>
+            ${posts.map(p => `<option value="${p.id}">${p.id} · ${p.hook.substring(0,40)}...</option>`).join('')}
+          </select>
+        </div>
+        <div class="camp-field"><label>Presupuesto ($USD)</label><input class="camp-input" id="cf-budget" type="number" placeholder="0.00"></div>
+        <div class="camp-field"><label>Alcance logrado</label><input class="camp-input" id="cf-alcance" type="number" placeholder="personas"></div>
+        <div class="camp-field"><label>Impresiones</label><input class="camp-input" id="cf-imp" type="number" placeholder="0"></div>
+        <div class="camp-field"><label>Clics</label><input class="camp-input" id="cf-clics" type="number" placeholder="0"></div>
+        <div class="camp-field"><label>CTR %</label><input class="camp-input" id="cf-ctr" type="number" step="0.01" placeholder="0.00"></div>
+        <div class="camp-field"><label>Resultados (reservas/DMs)</label><input class="camp-input" id="cf-res" type="number" placeholder="0"></div>
+        <div class="camp-field"><label>Costo por resultado ($)</label><input class="camp-input" id="cf-cpr" type="number" step="0.01" placeholder="0.00"></div>
+        <div class="camp-field"><label>Fecha inicio</label><input class="camp-input" id="cf-fi" type="date"></div>
+        <div class="camp-field"><label>Fecha fin</label><input class="camp-input" id="cf-ff" type="date"></div>
+        <div class="camp-field" style="grid-column:1/-1"><label>Notas / observaciones</label><input class="camp-input" id="cf-notas" placeholder="Qué funcionó, qué no, audiencia usada..."></div>
+      </div>
+      <div class="camp-form-actions">
+        <button class="btn-guardar-camp" id="btnGuardarCamp">Guardar campaña</button>
+        <button class="btn-cancelar-camp" id="btnCancelarCamp">Cancelar</button>
+      </div>
+    </div>
+
+    ${camps.length > 0 ? `
+    <div class="camp-summary">
+      <div class="camp-summary-item">
+        <div class="camp-summary-val">$${totalBudget.toFixed(0)}</div>
+        <div class="camp-summary-label">Invertido (USD)</div>
+      </div>
+      <div class="camp-summary-item">
+        <div class="camp-summary-val">${totalAlcance.toLocaleString()}</div>
+        <div class="camp-summary-label">Alcance total</div>
+      </div>
+      <div class="camp-summary-item">
+        <div class="camp-summary-val">${totalRes}</div>
+        <div class="camp-summary-label">Resultados totales</div>
+      </div>
+      <div class="camp-summary-item">
+        <div class="camp-summary-val">${avgCtr}%</div>
+        <div class="camp-summary-label">CTR promedio</div>
+      </div>
+    </div>
+
+    <table class="camp-table">
+      <thead>
+        <tr>
+          <th>Campaña</th>
+          <th>Plataforma</th>
+          <th>Post</th>
+          <th>Presupuesto</th>
+          <th>Alcance</th>
+          <th>CTR</th>
+          <th>Resultados</th>
+          <th>CPR</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${camps.map((c, i) => {
+          const post = posts.find(p => p.id === c.postId);
+          const ctrClass = parseFloat(c.ctr) >= 2 ? 'good' : parseFloat(c.ctr) >= 1 ? 'warn' : '';
+          return `
+          <tr>
+            <td><strong>${c.nombre}</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);">${c.fechaInicio||''} → ${c.fechaFin||''}</span></td>
+            <td><span style="font-family:var(--font-mono);font-size:11px;">${c.plataforma||'—'}</span></td>
+            <td style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);">${post ? post.hook.substring(0,30)+'…' : '—'}</td>
+            <td class="camp-metric">$${parseFloat(c.presupuesto||0).toFixed(0)} USD</td>
+            <td class="camp-metric">${parseInt(c.alcance||0).toLocaleString()}</td>
+            <td class="camp-metric ${ctrClass}">${c.ctr||'0'}%</td>
+            <td class="camp-metric good">${c.resultados||'0'}</td>
+            <td class="camp-metric">${c.cpr ? '$'+c.cpr : '—'}</td>
+            <td><button class="btn-del-camp" data-camp-idx="${i}">✗</button></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+    ` : `<div class="camp-empty">No hay campañas registradas aún.<br>Agregá tu primera campaña para ver los resultados aquí.</div>`}
+  `;
+
+  // Toggle form
+  document.getElementById('btnNuevaCamp')?.addEventListener('click', () => {
+    document.getElementById('campForm').classList.toggle('open');
+  });
+  document.getElementById('btnCancelarCamp')?.addEventListener('click', () => {
+    document.getElementById('campForm').classList.remove('open');
+  });
+
+  // Save campaign
+  document.getElementById('btnGuardarCamp')?.addEventListener('click', () => {
+    const get = id => document.getElementById(id)?.value?.trim() || '';
+    const camp = {
+      id: 'camp-' + Date.now(),
+      nombre: get('cf-nombre') || 'Sin nombre',
+      plataforma: get('cf-plat'),
+      postId: get('cf-post'),
+      presupuesto: get('cf-budget'),
+      alcance: get('cf-alcance'),
+      impresiones: get('cf-imp'),
+      clics: get('cf-clics'),
+      ctr: get('cf-ctr'),
+      resultados: get('cf-res'),
+      cpr: get('cf-cpr'),
+      fechaInicio: get('cf-fi'),
+      fechaFin: get('cf-ff'),
+      notas: get('cf-notas'),
+    };
+    state.campaigns.push(camp);
+    persistState();
+    buildCampanas();
+  });
+
+  // Delete campaign
+  container.querySelectorAll('.btn-del-camp').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.campIdx);
+      state.campaigns.splice(idx, 1);
+      persistState();
+      buildCampanas();
     });
   });
 }
@@ -2062,6 +2503,28 @@ function renderModalBody(post) {
       <textarea class="editable-textarea prod-notes-text" id="editNotes-${post.id}" spellcheck="false" style="min-height:60px;">${escapeHTML(post.productionNotes)}</textarea>
     </div>
 
+    <div class="pauta-section" id="pautaSection-${post.id}">
+      <div class="pauta-header">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Pauta publicitaria</div>
+          <div style="font-size:12px;color:var(--color-text-muted);">¿Este post tuvo inversión publicitaria?</div>
+        </div>
+        <div class="pauta-toggle-wrap">
+          <button class="pauta-toggle-btn ${(state.postEdits[post.id]?.hasPauta) ? 'active' : ''}" id="pautaToggle-${post.id}">
+            ${(state.postEdits[post.id]?.hasPauta) ? '✓ Sí tuvo pauta' : 'Sin pauta'}
+          </button>
+        </div>
+      </div>
+      <div class="pauta-fields" id="pautaFields-${post.id}" style="display:${(state.postEdits[post.id]?.hasPauta) ? 'grid' : 'none'};">
+        <div class="pauta-field"><label>Plataforma</label><input class="pauta-input" id="pautaPlat-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaPlat||'')}" placeholder="Meta Ads / TikTok Ads"></div>
+        <div class="pauta-field"><label>Presupuesto invertido</label><input class="pauta-input" id="pautaBudget-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaBudget||'')}" placeholder="$0 USD"></div>
+        <div class="pauta-field"><label>Alcance logrado</label><input class="pauta-input" id="pautaAlcance-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaAlcance||'')}" placeholder="personas"></div>
+        <div class="pauta-field"><label>CTR %</label><input class="pauta-input" id="pautaCtr-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaCtr||'')}" placeholder="0.00%"></div>
+        <div class="pauta-field"><label>Resultados (reservas/mensajes)</label><input class="pauta-input" id="pautaRes-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaRes||'')}" placeholder="0"></div>
+        <div class="pauta-field"><label>Costo por resultado</label><input class="pauta-input" id="pautaCpr-${post.id}" value="${escapeHTML(state.postEdits[post.id]?.pautaCpr||'')}" placeholder="$0.00"></div>
+      </div>
+    </div>
+
     <div class="status-row">
       <span class="status-label">Estado</span>
       <select class="status-select" id="statusSelect-${post.id}">
@@ -2088,7 +2551,13 @@ function renderModalBody(post) {
   const saveField = (id, field, getValue) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const save = () => { post[field] = getValue(el); };
+    const save = () => {
+      const val = getValue(el);
+      post[field] = val;
+      if (!state.postEdits[post.id]) state.postEdits[post.id] = {};
+      state.postEdits[post.id][field] = val;
+      persistState();
+    };
     el.addEventListener('input', save);
     el.addEventListener('blur', save);
   };
@@ -2098,6 +2567,31 @@ function renderModalBody(post) {
   saveField(`textES-${post.id}`,          'captionES',       el => el.value);
   saveField(`textEN-${post.id}`,          'captionEN',       el => el.value);
   saveField(`editNotes-${post.id}`,       'productionNotes', el => el.value);
+
+  // Pauta toggle
+  const pautaToggleBtn = document.getElementById(`pautaToggle-${post.id}`);
+  const pautaFields    = document.getElementById(`pautaFields-${post.id}`);
+  if (pautaToggleBtn) {
+    pautaToggleBtn.addEventListener('click', () => {
+      if (!state.postEdits[post.id]) state.postEdits[post.id] = {};
+      const newVal = !state.postEdits[post.id].hasPauta;
+      state.postEdits[post.id].hasPauta = newVal;
+      pautaToggleBtn.textContent = newVal ? '✓ Sí tuvo pauta' : 'Sin pauta';
+      pautaToggleBtn.classList.toggle('active', newVal);
+      pautaFields.style.display = newVal ? 'grid' : 'none';
+      persistState();
+    });
+  }
+  const pautaInputIds = ['Plat','Budget','Alcance','Ctr','Res','Cpr'];
+  pautaInputIds.forEach(key => {
+    const inp = document.getElementById(`pauta${key}-${post.id}`);
+    if (!inp) return;
+    inp.addEventListener('input', () => {
+      if (!state.postEdits[post.id]) state.postEdits[post.id] = {};
+      state.postEdits[post.id][`pauta${key}`] = inp.value;
+      persistState();
+    });
+  });
 
   // Caption toggles
   ['ES','EN'].forEach(lang => {
@@ -2149,6 +2643,7 @@ function renderModalBody(post) {
   if (sel) {
     sel.addEventListener('change', () => {
       state.postStatuses[post.id] = sel.value;
+      persistState();
       renderViews();
     });
   }
@@ -2168,6 +2663,7 @@ function renderViews() {
   buildCalendar();
   if (state.view === 'lista') buildList();
   if (state.view === 'pilares') buildPilares();
+  if (state.view === 'campanas') buildCampanas();
   updateStats();
 }
 
@@ -2179,6 +2675,7 @@ function switchView(view) {
 
   if (view === 'lista') buildList();
   if (view === 'pilares') buildPilares();
+  if (view === 'campanas') buildCampanas();
 }
 
 // ─── EVENT LISTENERS ─────────────────────────────────────────────────────────
@@ -2243,6 +2740,25 @@ document.querySelectorAll('.month-btn').forEach(btn => {
 // ─── INIT ────────────────────────────────────────────────────────────────────
 buildCalendar();
 updateStats();
+</script>
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+  // Cursor glow follow
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
+  });
+  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
+
+  // Pulse animation on calendar day hover
+  document.addEventListener('mouseover', e => {
+    const day = e.target.closest('.cal-day:not(.other-month):not(.past)');
+    if (day && !day._pulseAdded) {
+      day._pulseAdded = true;
+    }
+  });
 </script>
 </body>
 </html>
