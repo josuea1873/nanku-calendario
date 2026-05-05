@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NANKU · Calendario Editorial Mayo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Sora', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --color-bg: #0a0a0a;
+    --color-bg-card: #131313;
+    --color-bg-elevated: #1a1a1a;
+    --color-border: #262626;
+    --color-text: #ffffff;
+    --color-text-muted: #888888;
+    --color-accent: #ff6b2b;
+    --color-fire: #ff8a3d;
+    --color-tropical: #d4a574;
+    --color-success: #4ade80;
+    --color-music: #a78bfa;
+    --color-ig: #E1306C;
+    --color-tt: #ff0050;
+    --color-fb: #1877F2;
+    --color-stories: #f77737;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-display);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────────────── */
+  .app { max-width: 1400px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  .header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 32px;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .brand {}
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--color-text);
+  }
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* Month Nav */
+  .month-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-mono);
+  }
+  .month-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 0.05em;
+  }
+  .month-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .month-current {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* View Tabs */
+  .view-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    padding: 4px;
+  }
+  .view-tab {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .view-tab.active {
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .view-tab:hover:not(.active) { color: var(--color-text); }
+
+  /* Header bottom row */
+  .header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ─── STATS BAR ──────────────────────────────────────── */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    border: 1px solid var(--color-border);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 120px;
+    padding: 14px 20px;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+  }
+  .stat-value.accent { color: var(--color-accent); }
+  .stat-value.music { color: var(--color-music); }
+  .stat-value.success { color: var(--color-success); }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ─── FILTER BAR ─────────────────────────────────────── */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 28px;
+    padding: 16px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+  }
+  .filter-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .filter-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--color-border);
+    margin: 0 8px;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: 1px solid var(--color-border);
+    background: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 0.05em;
+  }
+  .chip:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+  .chip.active { color: var(--color-text); border-color: var(--color-text); background: var(--color-bg-elevated); }
+  .chip.active.plat-ig { border-color: var(--color-ig); color: var(--color-ig); }
+  .chip.active.plat-tiktok { border-color: var(--color-tt); color: var(--color-tt); }
+  .chip.active.plat-fb { border-color: var(--color-fb); color: var(--color-fb); }
+  .chip.active.plat-stories { border-color: var(--color-stories); color: var(--color-stories); }
+  .chip.active.pillar-producto { border-color: var(--color-accent); color: var(--color-accent); }
+  .chip.active.pillar-cultura { border-color: var(--color-tropical); color: var(--color-tropical); }
+  .chip.active.pillar-ugc { border-color: var(--color-success); color: var(--color-success); }
+  .chip.active.pillar-musica { border-color: var(--color-music); color: var(--color-music); }
+  .chip.active.status-all { border-color: var(--color-text); color: var(--color-text); }
+
+  /* ─── CALENDAR VIEW ──────────────────────────────────── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .cal-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .cal-day-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .cal-day {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    min-height: 100px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cal-day:hover:not(.other-month) { border-color: #3a3a3a; background: var(--color-bg-elevated); }
+  .cal-day.other-month { opacity: 0.3; cursor: default; }
+  .cal-day.other-month:hover { border-color: var(--color-border); background: var(--color-bg-card); }
+  .cal-day.today { border-color: var(--color-accent) !important; }
+  .cal-day.has-music { /* handled by dot */ }
+  .cal-day.published { opacity: 0.6; }
+
+  .cal-day-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cal-day.today .cal-day-num { color: var(--color-text); }
+
+  .today-badge {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: var(--color-accent);
+    color: #000;
+    padding: 2px 5px;
+    line-height: 1;
+  }
+
+  .cal-dots {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-feed { background: var(--color-accent); }
+  .dot-music { background: var(--color-music); }
+  .dot-stories { background: #f0a500; }
+
+  .cal-posts-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+  }
+  .cal-post-pill {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 2px 5px;
+    border-left: 2px solid;
+    background: rgba(255,255,255,0.03);
+  }
+  .pillar-producto { border-color: var(--color-accent); }
+  .pillar-cultura { border-color: var(--color-tropical); }
+  .pillar-ugc { border-color: var(--color-success); }
+  .pillar-musica { border-color: var(--color-music); }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .status-pending { background: #555; }
+  .status-production { background: #f0a500; }
+  .status-ready { background: var(--color-success); }
+  .status-published { background: var(--color-success); opacity: 0.6; }
+
+  /* ─── LISTA VIEW ─────────────────────────────────────── */
+  .list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .list-item {
+    display: grid;
+    grid-template-columns: 140px 100px 120px 1fr 120px;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 20px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .list-item:hover { border-color: #3a3a3a; background: var(--color-bg-elevated); }
+
+  .list-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .list-platform-badges {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .plat-badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    letter-spacing: 0.05em;
+  }
+  .plat-badge.ig { background: var(--color-ig); color: #fff; }
+  .plat-badge.tiktok { background: #000; color: var(--color-tt); border: 1px solid var(--color-tt); }
+  .plat-badge.fb { background: var(--color-fb); color: #fff; }
+  .plat-badge.stories { background: var(--color-stories); color: #000; }
+
+  .list-format {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    padding: 3px 8px;
+    border: 1px solid var(--color-border);
+  }
+  .list-hook {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .list-pillar {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+  .list-pillar.producto { color: var(--color-accent); }
+  .list-pillar.cultura { color: var(--color-tropical); }
+  .list-pillar.ugc { color: var(--color-success); }
+  .list-pillar.musica { color: var(--color-music); }
+
+  /* ─── PILARES VIEW ───────────────────────────────────── */
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 768px) { .pilares-grid { grid-template-columns: 1fr; } }
+
+  .pilar-section { border: 1px solid var(--color-border); }
+  .pilar-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pilar-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pilar-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pilar-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+  .pilar-posts { padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+  .pilar-post {
+    padding: 12px 14px;
+    background: var(--color-bg-card);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border: 1px solid transparent;
+  }
+  .pilar-post:hover { border-color: var(--color-border); background: var(--color-bg-elevated); }
+  .pilar-post-date {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    margin-top: 2px;
+    min-width: 60px;
+  }
+  .pilar-post-info { flex: 1; min-width: 0; }
+  .pilar-post-hook {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+  .pilar-post-meta {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── MODAL ──────────────────────────────────────────── */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 760px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .modal-backdrop.open .modal { transform: translateY(0); }
+
+  .modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-card);
+    z-index: 2;
+  }
+  .modal-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  /* Post tabs (if multiple posts in a day) */
+  .modal-post-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+  }
+  .modal-post-tab {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 10px 16px;
+    border: none;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .modal-post-tab.active { color: var(--color-text); border-bottom-color: var(--color-accent); background: var(--color-bg-elevated); }
+
+  .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+  .modal-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+  .format-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+  }
+  .pillar-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border: 1px solid;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .pillar-tag.producto { border-color: var(--color-accent); color: var(--color-accent); }
+  .pillar-tag.cultura { border-color: var(--color-tropical); color: var(--color-tropical); }
+  .pillar-tag.ugc { border-color: var(--color-success); color: var(--color-success); }
+  .pillar-tag.musica { border-color: var(--color-music); color: var(--color-music); }
+
+  .modal-hook {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--color-text);
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .caption-block { border: 1px solid var(--color-border); overflow: hidden; }
+  .caption-toggle {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--color-bg-elevated);
+    border: none;
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.15s ease;
+  }
+  .caption-toggle:hover { background: #222; }
+  .caption-chevron { transition: transform 0.2s ease; }
+  .caption-toggle.open .caption-chevron { transform: rotate(180deg); }
+  .caption-content {
+    display: none;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .caption-content.visible { display: block; }
+  .caption-actions {
+    padding: 0 16px 16px;
+    display: none;
+    gap: 8px;
+  }
+  .caption-actions.visible { display: flex; }
+  .btn-copy {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 16px;
+    background: var(--color-accent);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.15s ease;
+  }
+  .btn-copy:hover { background: var(--color-fire); }
+  .btn-copy.copied { background: var(--color-success); color: #000; }
+
+  .modal-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .cta-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .hashtags-block { display: flex; gap: 6px; flex-wrap: wrap; }
+  .hashtag-chip {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    padding: 3px 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-elevated);
+  }
+
+  .prod-notes {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid #f0a500;
+    padding: 12px 16px;
+  }
+  .prod-notes-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: #f0a500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .prod-notes-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    white-space: pre-wrap;
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 4px;
+  }
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .status-select {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 6px 12px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 160px;
+  }
+  .status-select:focus { border-color: var(--color-accent); }
+  .status-select option { background: var(--color-bg-elevated); }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  .footer {
+    margin-top: 60px;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-brand {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+  }
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+  }
+  .footer-accent { color: var(--color-accent); }
+
+  /* ─── LEGEND ─────────────────────────────────────────── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── EMPTY STATE ────────────────────────────────────── */
+  .empty-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    flex: 1;
+  }
+
+  /* ─── SCROLL BAR ─────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .cal-grid, .cal-grid-header {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .cal-day-name:nth-child(n+5),
+    .cal-day-col-hide { display: none; }
+  }
+  @media (max-width: 600px) {
+    .app { padding: 0 12px 60px; }
+    .header { padding: 24px 0 20px; }
+    .list-item {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .cal-grid, .cal-grid-header {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+    .header-top { flex-direction: column; gap: 16px; }
+    .month-nav { order: -1; }
+  }
+
+  /* ─── TRANSITION ANIMATION ───────────────────────────── */
+  .view { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Active filter highlight on calendar */
+  .cal-day.filtered-out { opacity: 0.15; pointer-events: none; }
+
+  /* ─── PAST DAYS ──────────────────────────────────────────── */
+  .cal-day.past {
+    opacity: 0.35;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.015) 3px,
+      rgba(255,255,255,0.015) 6px
+    );
+  }
+  .cal-day.past .cal-post-pill { opacity: 0.5; }
+  .past-badge {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    background: #333;
+    color: #666;
+    padding: 2px 5px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  /* ─── TOMORROW ───────────────────────────────────────────── */
+  .cal-day.tomorrow { border-color: var(--color-success) !important; }
+  .tomorrow-badge {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: var(--color-success);
+    color: #000;
+    padding: 2px 5px;
+    line-height: 1;
+  }
+
+  /* ─── IMPROVED CALENDAR CARDS ────────────────────────────── */
+  .cal-day { min-height: 130px !important; }
+  .cal-post-pill { font-size: 10px !important; padding: 3px 6px !important; }
+  .cal-day-num { font-size: 13px !important; }
+
+  /* ─── CAPTION ES / EN DISTINCTION ───────────────────────── */
+  .caption-block.lang-es { border-left: 3px solid var(--color-accent); border-color: var(--color-border); }
+  .caption-block.lang-en { border-left: 3px solid #4a9eff; border-color: var(--color-border); }
+  .caption-lang-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
+  }
+  .es-badge {
+    background: rgba(255,107,43,0.12);
+    color: var(--color-accent);
+    border: 1px solid rgba(255,107,43,0.35);
+  }
+  .en-badge {
+    background: rgba(74,158,255,0.12);
+    color: #4a9eff;
+    border: 1px solid rgba(74,158,255,0.35);
+  }
+  .caption-toggle.lang-es-toggle { background: rgba(255,107,43,0.04); border-bottom: 1px solid var(--color-border); }
+  .caption-toggle.lang-en-toggle { background: rgba(74,158,255,0.04); border-bottom: 1px solid var(--color-border); }
+  .caption-lang-note { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-muted); }
+
+  /* ─── IMPROVED LIST RESPONSIVE ───────────────────────────── */
+  @media (max-width: 1100px) {
+    .list-item { grid-template-columns: 130px 90px 110px 1fr; }
+    .list-pillar { display: none; }
+  }
+  @media (max-width: 700px) {
+    .list-item { grid-template-columns: 70px 1fr; gap: 10px; padding: 12px 14px; position: relative; }
+    .list-format, .list-pillar { display: none; }
+    .list-platform-badges { position: absolute; top: 12px; right: 14px; }
+  }
+
+  /* ─── POSDATA SECTION ────────────────────────────────────── */
+  .posdata-section {
+    margin-top: 72px;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .posdata-header {
+    padding: 40px 48px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+  }
+  .posdata-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+  .posdata-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-text);
+    margin-bottom: 20px;
+  }
+  .posdata-subtitle {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    max-width: 700px;
+  }
+  .posdata-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+  }
+  .posdata-card {
+    background: var(--color-bg-card);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .posdata-card-num {
+    font-family: var(--font-mono);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    opacity: 0.25;
+    margin-bottom: -4px;
+  }
+  .posdata-card-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.35;
+  }
+  .posdata-card-body {
+    font-size: 13px;
+    line-height: 1.72;
+    color: var(--color-text-muted);
+  }
+  .posdata-card-body strong { color: var(--color-text); font-weight: 600; }
+  .posdata-card-data {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--color-accent);
+    padding: 8px 12px;
+    background: rgba(255,107,43,0.07);
+    border: 1px solid rgba(255,107,43,0.18);
+    border-left: 3px solid var(--color-accent);
+    margin-top: 4px;
+  }
+  .posdata-foot {
+    padding: 18px 48px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .posdata-body { grid-template-columns: 1fr; }
+    .posdata-header { padding: 28px 24px; }
+    .posdata-card { padding: 22px 24px; }
+    .posdata-foot { padding: 14px 24px; }
+  }
+  @media (max-width: 600px) {
+    .posdata-header { padding: 24px 16px; }
+    .posdata-card { padding: 20px 16px; }
+    .posdata-foot { padding: 12px 16px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top">
+      <div class="brand">
+        <div class="brand-name">NANKU</div>
+        <div class="brand-sub">Calendario Editorial · Mayo 2026</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;flex-wrap:wrap;">
+        <div class="month-nav">
+          <button class="month-btn">← Abril</button>
+          <span class="month-current">MAYO 2026</span>
+          <button class="month-btn">Junio →</button>
+        </div>
+        <div class="view-tabs">
+          <button class="view-tab active" data-view="calendario">Calendario</button>
+          <button class="view-tab" data-view="lista">Lista</button>
+          <button class="view-tab" data-view="pilares">Pilares</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" id="statsBar">
+    <!-- Paquete label -->
+    <div class="stat-item" style="flex:0 0 auto;min-width:130px;background:rgba(255,107,43,0.06);border-right:1px solid rgba(255,107,43,0.2);">
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent);font-weight:700;">Paquete</div>
+      <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--color-text);margin-top:3px;">Presencia Activa</div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--color-accent);margin-top:1px;">$600 USD/mes</div>
+    </div>
+    <!-- Entregables del paquete -->
+    <div class="stat-item">
+      <div class="stat-value accent" id="stat-video-pkg">0<span style="font-size:13px;font-weight:400;color:var(--color-text-muted)">/1</span></div>
+      <div class="stat-label">Video Comercial</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value accent" id="stat-reels-pkg">0<span style="font-size:13px;font-weight:400;color:var(--color-text-muted)">/6</span></div>
+      <div class="stat-label">Reels</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value accent" id="stat-bts-pkg">0<span style="font-size:13px;font-weight:400;color:var(--color-text-muted)">/1</span></div>
+      <div class="stat-label">Behind The Scenes</div>
+    </div>
+    <div class="stat-item" style="border-right:2px solid rgba(255,107,43,0.3);">
+      <div class="stat-value accent" id="stat-total-pkg">0<span style="font-size:13px;font-weight:400;color:var(--color-text-muted)">/8</span></div>
+      <div class="stat-label">Total entregables</div>
+    </div>
+    <!-- Separador visual -->
+    <div class="stat-item" style="flex:0 0 1px;padding:0;background:var(--color-border);min-width:1px;"></div>
+    <!-- Stats del calendario -->
+    <div class="stat-item" style="background:rgba(255,255,255,0.015);">
+      <div class="stat-value" id="stat-total">30</div>
+      <div class="stat-label">Posts planeados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-carruseles">5</div>
+      <div class="stat-label">Carruseles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value music" id="stat-music">14</div>
+      <div class="stat-label">Noches música</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value success" id="stat-strategic">7</div>
+      <div class="stat-label">Ángulos estratégicos</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Plataforma</span>
+    <button class="chip plat-ig" data-filter="platform" data-value="instagram">IG</button>
+    <button class="chip plat-tiktok" data-filter="platform" data-value="tiktok">TikTok</button>
+    <button class="chip plat-fb" data-filter="platform" data-value="facebook">FB</button>
+    <button class="chip plat-stories" data-filter="platform" data-value="stories">Stories</button>
+
+    <div class="filter-divider"></div>
+    <span class="filter-label">Pilar</span>
+    <button class="chip pillar-producto" data-filter="pillar" data-value="producto">Producto & Fire</button>
+    <button class="chip pillar-cultura" data-filter="pillar" data-value="cultura">Cultura & Lugar</button>
+    <button class="chip pillar-ugc" data-filter="pillar" data-value="ugc">UGC & Social Proof</button>
+    <button class="chip pillar-musica" data-filter="pillar" data-value="musica">Música & Ambiente</button>
+
+    <div class="filter-divider"></div>
+    <span class="filter-label">Estado</span>
+    <button class="chip active status-all" data-filter="status" data-value="all">Todos</button>
+    <button class="chip" data-filter="status" data-value="pending">Pendiente</button>
+    <button class="chip" data-filter="status" data-value="production">En producción</button>
+    <button class="chip" data-filter="status" data-value="ready">Listo</button>
+    <button class="chip" data-filter="status" data-value="published">Publicado</button>
+  </div>
+
+  <!-- CALENDAR VIEW -->
+  <div class="view active" id="view-calendario">
+    <div class="legend">
+      <div class="legend-item"><span class="dot dot-feed"></span> Feed post</div>
+      <div class="legend-item"><span class="dot dot-music"></span> Música en vivo</div>
+      <div class="legend-item"><span class="dot dot-stories"></span> Stories</div>
+      <div class="legend-item">
+        <span style="width:14px;height:10px;border:1px solid var(--color-accent);display:inline-block;"></span> Hoy
+      </div>
+    </div>
+    <div class="cal-grid-header">
+      <div class="cal-day-name">Lun</div>
+      <div class="cal-day-name">Mar</div>
+      <div class="cal-day-name">Mié</div>
+      <div class="cal-day-name">Jue</div>
+      <div class="cal-day-name">Vie</div>
+      <div class="cal-day-name">Sáb</div>
+      <div class="cal-day-name">Dom</div>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+
+  <!-- LISTA VIEW -->
+  <div class="view" id="view-lista">
+    <div class="list-view" id="listView"></div>
+  </div>
+
+  <!-- PILARES VIEW -->
+  <div class="view" id="view-pilares">
+    <div class="pilares-grid" id="pilaresGrid"></div>
+  </div>
+
+  <!-- POSDATA ESTRATÉGICA -->
+  <section class="posdata-section">
+    <div class="posdata-header">
+      <div class="posdata-eyebrow">Posdata estratégica · Bralto — Mayo 2026</div>
+      <div class="posdata-title">Por qué esta estrategia.<br>Y por qué ahora.</div>
+      <div class="posdata-subtitle">Este calendario no es solo un plan de contenido. Es la respuesta a datos de mercado reales sobre La Fortuna y el ecosistema turístico del Volcán Arenal. Cada pilar, cada hook y cada ángulo tiene una razón basada en números, en el comportamiento real del visitante y en brechas que ningún competidor está llenando. Acá el por qué.</div>
+    </div>
+    <div class="posdata-body">
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">01</div>
+        <div class="posdata-card-title">El mercado es 15× más grande de lo que parece</div>
+        <div class="posdata-card-body">El Parque Nacional Volcán Arenal recibió <strong>1.5 millones de visitantes en 2024</strong>. La Fortuna es el punto de entrada obligatorio. Si Nanku captura solo el 0.1% de ese flujo, son <strong>1,500 mesas adicionales al año</strong> — sin cambiar nada del producto, solo con mejor visibilidad digital.</div>
+        <div class="posdata-card-data">1,500,000 visitantes/año → captura 0.1% = +1,500 mesas · Sin inversión en producto</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">02</div>
+        <div class="posdata-card-title">El turista decide rápido y en ventana muy corta</div>
+        <div class="posdata-card-body">El visitante promedio de EE.UU. pasa <strong>2-3 noches en La Fortuna</strong>. La decisión de restaurante se toma con <strong>2-6 horas de anticipación</strong> — vía Google, Tripadvisor o Instagram. El contenido debe funcionar como trigger inmediato, no como funnel largo. Cada post debe poder convencer al turista que está a 10 minutos a pie.</div>
+        <div class="posdata-card-data">Ventana de conversión: 2-6 horas · Canal de decisión: Google + IG + Tripadvisor</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">03</div>
+        <div class="posdata-card-title">TikTok: máximo retorno, cero competencia en zona</div>
+        <div class="posdata-card-body">Ningún restaurante de La Fortuna tiene presencia activa en TikTok. <strong>El fire show del steak y los cócteles tiki son materialmente virales</strong> — generan UGC espontáneo sin pedir nada. El costo de entrada es cero. El upside es capturar al turista joven antes de que llegue a La Fortuna, con Nanku ya en su cabeza.</div>
+        <div class="posdata-card-data">Restaurantes activos en TikTok en zona: 0 · Costo de lanzamiento: $0 · Potencial de UGC: alto</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">04</div>
+        <div class="posdata-card-title">La humanización de marca está completamente sin explotar</div>
+        <div class="posdata-card-body"><strong>Laura C responde reseñas en Tripadvisor desde 2018</strong> pero nunca aparece en redes sociales. Jason, Manuel, Tato y Gustavo son mencionados por nombre en reseñas de múltiples países. La identidad humana del restaurante existe y es poderosa — pero no se está comunicando. Es el activo de marca más barato de activar.</div>
+        <div class="posdata-card-data">Staff mencionado por nombre en reseñas: 4 personas · Años respondiendo reseñas: 7+ · Apariciones en redes: 0</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">05</div>
+        <div class="posdata-card-title">El producto más pedido no está en el menú</div>
+        <div class="posdata-card-body">El <strong>coconut shrimp special</strong> es el plato más mencionado en reseñas externas de visitantes de todo el mundo — y no aparece en el menú oficial. O es un especial rotativo sin comunicar, o desapareció. Resolver esto es oro puro: si existe, comunicarlo activamente puede duplicar su frecuencia de pedido. Si no existe, considerarlo para reintroducir.</div>
+        <div class="posdata-card-data">Estado actual: CONFIRMAR CON CLIENTE antes de publicar · Potencial: contenido de muy alto impacto</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">06</div>
+        <div class="posdata-card-title">Una historia de origen que nadie cuenta todavía</div>
+        <div class="posdata-card-body">Nanku <strong>nació en la selva y se trasladó al centro de La Fortuna</strong>. Esa narrativa de autenticidad — combinada con el significado Chorotega del nombre ("hogar") — es exactamente el tipo de historia que conecta con el turista experiencial de alto poder adquisitivo. No es marketing fabricado. Es arqueología de marca real.</div>
+        <div class="posdata-card-data">Activo verificado: historia de origen · Competidores contando esta historia: 0 · Costo de producción: bajo</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">07</div>
+        <div class="posdata-card-title">La ventaja de ubicación más obvia de La Fortuna</div>
+        <div class="posdata-card-body">Nanku está <strong>literalmente frente a Don Rufino</strong> — el restaurante fine dining top de La Fortuna. La comunicación correcta no es competir en ese terreno sino posicionar Nanku como la <strong>experiencia completa</strong>: fire show + música en vivo 3 noches + cócteles tiki + cocina tica gourmet + granja propia, a un precio accesible.</div>
+        <div class="posdata-card-data">Diferencial comunicable: experiencia completa con identidad tropical · Precio promedio: 40-60% menor que fine dining</div>
+      </div>
+
+      <div class="posdata-card">
+        <div class="posdata-card-num">08</div>
+        <div class="posdata-card-title">El lunes ya gana — solo falta comunicarlo</div>
+        <div class="posdata-card-body">Según Google Business, el <strong>lunes a las 8 PM es la hora de mayor concurrencia del restaurante</strong> — con espera de hasta 15 minutos. Nanku es el único restaurante de La Fortuna con música en vivo el lunes. Ese dato no está en ninguna pieza de contenido existente. Es el pilar de contenido más urgente y de más fácil ejecución.</div>
+        <div class="posdata-card-data">Pico de concurrencia: Lunes 8 PM · Espera promedio: 15 min · Música en vivo el lunes: exclusivo en zona</div>
+      </div>
+
+    </div>
+    <div class="posdata-foot">
+      <span style="color:var(--color-accent);font-weight:700;letter-spacing:0.1em;">BRALTO</span>
+      <span style="color:var(--color-border);">·</span>
+      <span>Análisis basado en: Google Business Profile · Tripadvisor (1,404 reseñas) · Google Reviews (1,214 reseñas) · Instagram @restaurantenanku · restaurantenanku.net · Datos de visitantes SINAC 2024 · Mayo 2026</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">Bralto · Calendario Editorial Mayo 2026 · <span class="footer-accent">Nanku Restaurante</span></div>
+    <div class="footer-meta">Generado para Josue · josuea421@gmail.com</div>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-date" id="modalDate"></div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div id="modalPostTabs" class="modal-post-tabs"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+// Artista por noche: PENDIENTE — confirmar con cliente cada semana
+// Roster disponible: Esteban Calero · Paco De María · Chalo Gonzales · Chris Charía · Bryan Villalobos · Nathan Bolívar · Andrés Rojas
+const LIVE_MUSIC = {
+  // Viernes
+  "2026-05-01": { day: "Viernes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-08": { day: "Viernes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-15": { day: "Viernes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-22": { day: "Viernes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-29": { day: "Viernes", slot: "Noche de música en vivo", pending: true },
+  // Sábados
+  "2026-05-02": { day: "Sábado", slot: "Noche de música en vivo", pending: true },
+  "2026-05-09": { day: "Sábado", slot: "Noche de música en vivo", pending: true },
+  "2026-05-16": { day: "Sábado", slot: "Noche de música en vivo", pending: true },
+  "2026-05-23": { day: "Sábado", slot: "Noche de música en vivo", pending: true },
+  "2026-05-30": { day: "Sábado", slot: "Noche de música en vivo", pending: true },
+  // Lunes
+  "2026-05-04": { day: "Lunes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-11": { day: "Lunes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-18": { day: "Lunes", slot: "Noche de música en vivo", pending: true },
+  "2026-05-25": { day: "Lunes", slot: "Noche de música en vivo", pending: true },
+};
+
+const PILLAR_META = {
+  producto: { label: "Producto & Fire", color: "#ff6b2b" },
+  cultura:  { label: "Cultura & Lugar", color: "#d4a574" },
+  ugc:      { label: "UGC & Social Proof", color: "#4ade80" },
+  musica:   { label: "Música & Ambiente", color: "#a78bfa" },
+};
+
+const STATUS_META = {
+  pending:    { label: "Pendiente",      dotClass: "status-pending" },
+  production: { label: "En producción",  dotClass: "status-production" },
+  ready:      { label: "Listo",          dotClass: "status-ready" },
+  published:  { label: "Publicado",      dotClass: "status-published" },
+};
+
+// ─── PAQUETE PRESENCIA ACTIVA — $600 USD/mes ─────────────────────────────────
+const PACKAGE = {
+  name: "Presencia Activa",
+  price: "$600 USD",
+  deliverables: {
+    videoComercial: { label: "Video Comercial", total: 1, postIds: ["post-003"] },
+    reels:          { label: "Reels",           total: 6, postIds: ["post-006","post-007","post-013","post-015","post-022","post-025"] },
+    bts:            { label: "Behind The Scenes", total: 1, postIds: ["post-011"] },
+  }
+};
+
+const posts = [
+  {
+    id: "post-001", date: "2026-05-01",
+    platforms: ["instagram", "stories"],
+    format: "Reel 20s", pillar: "musica",
+    hook: "Esta noche: Paco De María en vivo. Flamenco bajo las estrellas de Arenal.",
+    captionES: "Granada llega a La Fortuna esta noche.\n\nPaco De María — músico gitano nacido en España, ha tocado en Europa y América Latina — toma el escenario de Nanku cada viernes.\n\nBajo el cielo abierto. Con el Arenal de testigo.\n\nReservá tu mesa antes de que se llene — link en bio.",
+    captionEN: "Granada meets Arenal tonight.\n\nPaco De María — flamenco guitarist born in Spain, performed across Europe and Latin America — takes the Nanku stage every Friday.\n\nOpen sky. Volcano in the background. Fire in the music.\n\nBook your table — link in bio.",
+    cta: "Reservá en el link de bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#ArenalVolcano","#LiveMusicCR","#FlamencoCostaRica","#PacoDeMaría","#ArenalNights","#CostaRicaTravel"],
+    productionNotes: "Captura: escenario + músico en acción. Hora ideal: 7:30 PM. Luz Edison bulbs. Video vertical 9:16.",
+    status: "pending"
+  },
+  {
+    id: "post-002", date: "2026-05-02",
+    platforms: ["instagram"],
+    format: "Foto editorial", pillar: "musica",
+    hook: "Sábado en Nanku se ve así.",
+    captionES: "Fuego. Música. Gente que no quiere irse.\n\nChalo Gonzales en el escenario. El local lleno. Los tiki corriendo.\n\nAsí se ve un sábado en Nanku.\n\n📍 La Fortuna, Costa Rica\n🎵 Live music todos los sábados desde las 7 PM",
+    captionEN: "Fire. Music. People who don't want to leave.\n\nChalo Gonzales on stage. Full house. Tiki cocktails flowing.\n\nThis is what Saturday looks like at Nanku.\n\n📍 La Fortuna, Costa Rica\n🎵 Live music every Saturday from 7 PM",
+    cta: "Reservá tu mesa — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#SaturdayNight","#LiveMusicCR","#ArenalNights","#CostaRicaFood","#TikiCocktails"],
+    productionNotes: "Foto editorial dark & moody del ambiente nocturno. Músico en fondo, primer plano de cócteles o gente. ISO 800-1600.",
+    status: "pending"
+  },
+  {
+    id: "post-003", date: "2026-05-05",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 30s", pillar: "cultura",
+    hook: "Nanku significa hogar en lengua Chorotega. Y así se siente.",
+    captionES: "Nanku.\n\nUna palabra de la lengua Chorotega — el pueblo originario de Costa Rica — que significa hogar.\n\nNo le pusimos ese nombre por accidente.\n\nEste restaurante nació en la selva, cruzó la jungla y encontró su lugar en el corazón de La Fortuna. Hoy, amigos, familias y viajeros de todo el mundo se sientan bajo el mismo techo de palma a compartir algo real.\n\nBienvenidos a Nanku. Su hogar en el Arenal.\n\n🎵 Esta noche: Esteban Calero en vivo — 7 PM",
+    captionEN: "Nanku.\n\nA word from the Chorotega language — Costa Rica's indigenous people — meaning home.\n\nWe didn't choose that name by accident.\n\nThis restaurant was born in the jungle, found its way to the heart of La Fortuna, and became a place where travelers from every corner of the world sit under the same palm roof and share something real.\n\nWelcome to Nanku. Your home at Arenal.\n\n🎵 Tonight: Esteban Calero live — 7 PM",
+    cta: "Reservá tu noche — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#ArenalVolcano","#CostaRicaCulture","#ChorotegaCulture","#PuraVida","#VisitCostaRica","#ArenalTrip"],
+    productionNotes: "ÁNGULO: origen en la selva + significado Chorotega. Tomas: exterior rancho de noche, manos compartiendo comida, letrero NANKU. Narración en off o texto en pantalla. Música ambient tropical.",
+    status: "pending"
+  },
+  {
+    id: "post-004", date: "2026-05-05",
+    platforms: ["instagram"],
+    format: "Carrusel 6 slides", pillar: "producto",
+    hook: "Los 6 Tikis de Nanku. ¿Cuál sos vos?",
+    captionES: "No son cócteles. Son pociones.\n\nCada tiki de Nanku viene en vasija coleccionable y carga el espíritu de la selva costarricense.\n\nSlide → y descubrí cuál sos vos:\n\n1. Pura Vida — el espíritu de Costa Rica en un vaso\n2. Nanku (signature) — ron oscuro, canela y beso de mango\n3. Julia — Caribbean elegance\n4. A Cachete — con misterioso blue curaçao\n5. Tuanis — \"simplemente tuanis\"\n6. Jack Sparrow — Campari, maracuyá y jengibre\n\n₡8,000 c/u · Servidos en vasija tiki coleccionable",
+    captionEN: "These aren't cocktails. They're potions.\n\nEach Nanku tiki comes in a collectible vessel and carries the spirit of the Costa Rican jungle.\n\nSwipe → find out which one you are:\n\n1. Pura Vida — the spirit of Costa Rica in a glass\n2. Nanku (signature) — dark rum, cinnamon & mango\n3. Julia — Caribbean elegance\n4. A Cachete — with mysterious blue curaçao\n5. Tuanis — \"simply tuanis\"\n6. Jack Sparrow — Campari, passion fruit & ginger\n\n₡8,000 each · Served in collectible tiki vessels",
+    cta: "Pedí el tuyo — reservas en el link",
+    hashtags: ["#NankuRestaurante","#TikiCocktails","#CostaRicaCocktails","#LaFortuna","#PuraVida","#TropicalDrinks","#ArenalVolcano","#Foodie"],
+    productionNotes: "6 slides: foto individual de cada tiki en fondo negro. Luz lateral cálida. Nombre del cóctel en tipografía bold sobre la imagen. Cierre: collage de los 6 + CTA.",
+    status: "pending"
+  },
+  {
+    id: "post-005", date: "2026-05-06",
+    platforms: ["instagram"],
+    format: "Foto + caption largo", pillar: "ugc",
+    hook: "1,404 reseñas. 4.7 estrellas. #21 de 275 restaurantes en La Fortuna.",
+    captionES: "No lo decimos nosotros.\n\nLo dicen 1,404 personas de todo el mundo que se sentaron en estas mesas y decidieron escribirlo.\n\n\"The best meal of our trip\"\n\"Make reservations — it fills up fast\"\n\"Jason and the team made it special\"\n\nTripadvisor Travelers' Choice. Top 10% de restaurantes en el mundo.\n\nY el Volcán Arenal de fondo.\n\nReservá antes de que se llene — link en bio.",
+    captionEN: "Don't take our word for it.\n\n1,404 people from around the world sat at these tables and decided to write about it.\n\n\"The best meal of our trip\"\n\"Make reservations — it fills up fast\"\n\"Jason and the team made it special\"\n\nTripAdvisor Travelers' Choice. Top 10% restaurants worldwide.\n\nBook before it fills — link in bio.",
+    cta: "Leé las reseñas — link en bio",
+    hashtags: ["#NankuRestaurante","#TripAdvisor","#LaFortuna","#BestRestaurantArenal","#CostaRicaFood","#TravelersChoice","#ArenalVolcano","#FoodieTravel"],
+    productionNotes: "ÁNGULO: social proof. Foto del local lleno de noche. Superponer número '4.7★' en tipografía grande. Alternativa: mockup de reseña real en pantalla.",
+    status: "pending"
+  },
+  {
+    id: "post-006", date: "2026-05-07",
+    platforms: ["tiktok"],
+    format: "Reel 15s", pillar: "producto",
+    hook: "POV: pediste el steak en Nanku.",
+    captionES: "El show empieza antes de que toques el tenedor 🔥\n\n#NankuRestaurante #LaFortuna #SteakHouse #FireShow #CostaRica #FoodTikTok #ArenalVolcano",
+    captionEN: "The show starts before you even touch your fork 🔥\n\n#NankuRestaurante #LaFortuna #SteakHouse #FireShow #CostaRica #FoodTikTok",
+    cta: "Reservá en el link de bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#SteakHouse","#FireShow","#CostaRica","#FoodTikTok","#ArenalVolcano"],
+    productionNotes: "TikTok puro. Cámara lenta del fuego tocando la carne. POV desde el punto de vista del cliente sentado. Sin texto hasta el final. Máximo impacto visual.",
+    status: "pending"
+  },
+  {
+    id: "post-007", date: "2026-05-08",
+    platforms: ["instagram", "stories"],
+    format: "Reel 25s", pillar: "musica",
+    hook: "Flamenco viernes.",
+    captionES: "Hay noches que no se olvidan.\n\nPaco De María — nacido en Granada, España — lleva el flamenco gitano por Europa y América Latina. Esta noche llega a La Fortuna.\n\nDebajo de las estrellas del Arenal. Con una copa en la mano.\n\nMesa disponibles — reservá ahora. Link en bio.",
+    captionEN: "Some nights you don't forget.\n\nPaco De María — born in Granada, Spain — has brought his flamenco across Europe and Latin America. Tonight he brings it to La Fortuna.\n\nUnder the Arenal stars. Drink in hand.\n\nTables available — book now. Link in bio.",
+    cta: "Reservá esta noche — link en bio",
+    hashtags: ["#NankuRestaurante","#FlamencoLive","#LaFortuna","#LiveMusicCR","#PacoDeMaría","#ArenalNights","#CostaRicaTravel","#FridayNight"],
+    productionNotes: "Video del set de Paco. Intercalar tomas del público, tomas de cócteles en mesa, tomas de manos en guitarra. Corte rápido al ritmo del flamenco.",
+    status: "pending"
+  },
+  {
+    id: "post-008", date: "2026-05-09",
+    platforms: ["tiktok"],
+    format: "Reel 30s", pillar: "ugc",
+    hook: "Reaccionando a las reseñas de Nanku en Tripadvisor.",
+    captionES: "Cuando el turista escribe lo que el equipo de Nanku ya sabe 🙌\n\n#NankuRestaurante #LaFortuna #CostaRica #TripAdvisor #Restaurante #PuraVida",
+    captionEN: "When the review says exactly what we already knew 🙌\n\n#NankuRestaurante #LaFortuna #CostaRica #TripAdvisor",
+    cta: "Reservá — link en bio",
+    hashtags: ["#NankuRestaurante","#TripAdvisor","#CostaRica","#LaFortuna","#PuraVida"],
+    productionNotes: "Formato: pantalla del teléfono mostrando reseña real + reacción de alguien del staff (Jason, Manuel o Gustavo). Trending sound. Auténtico, no actuado.",
+    status: "pending"
+  },
+  {
+    id: "post-009", date: "2026-05-10",
+    platforms: ["stories"],
+    format: "Stories x3", pillar: "ugc",
+    hook: "UGC del fin de semana + 'Reservá para la semana'",
+    captionES: "Stories: (1) Reposteá UGC de clientes del fin de semana. (2) Foto de mesa llena con texto '¿Quién viene esta semana?'. (3) Swipe-up a reservas.",
+    captionEN: "Stories: (1) Repost weekend customer UGC. (2) Full table photo with 'Who's coming this week?'. (3) Swipe-up to reservations.",
+    cta: "Deslizá para reservar",
+    hashtags: ["#NankuRestaurante","#LaFortuna"],
+    productionNotes: "Recolectar UGC de clientes del fin de semana (etiquetas + stories de huéspedes). Pedir permiso antes de repostear.",
+    status: "pending"
+  },
+  {
+    id: "post-010", date: "2026-05-11",
+    platforms: ["instagram"],
+    format: "Reel 30s", pillar: "musica",
+    hook: "Lunes en La Fortuna: la mayoría descansa. Nosotros tocamos.",
+    captionES: "Esteban Calero toma el escenario de Nanku cada lunes.\n\nUn músico. Un pedal de loop. Una banda completa construida en tiempo real.\n\nEl lunes en La Fortuna tiene su propio ritmo — y arranca a las 7 PM.\n\nReservá tu mesa. Link en bio.",
+    captionEN: "Esteban Calero takes the Nanku stage every Monday.\n\nOne musician. One loop pedal. A full band built in real time.\n\nMonday in La Fortuna has its own rhythm — and it starts at 7 PM.\n\nBook your table. Link in bio.",
+    cta: "Reservá para esta noche — link en bio",
+    hashtags: ["#NankuRestaurante","#EstebanCalero","#LiveLoopShow","#LaFortuna","#MondayNight","#ArenalNights","#LiveMusicCR"],
+    productionNotes: "DATO CLAVE: lunes 8 PM es la hora pico del restaurante — usar en caption. Video de Esteban con el setup del loop pedal visible. Atmósfera íntima y nocturna.",
+    status: "pending"
+  },
+  {
+    id: "post-011", date: "2026-05-12",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 30s", pillar: "cultura",
+    hook: "Detrás de cada reseña perfecta, hay una persona con nombre.",
+    captionES: "Jason. Manuel. Tato. Gustavo.\n\nCuatro nombres que aparecen una y otra vez en las reseñas de visitantes de EE.UU., Europa, Latinoamérica.\n\nNo es casualidad. Es cultura de equipo.\n\nEn Nanku, el servicio no es un protocolo — es personal.\n\nVení a conocerlos. Reservá en el link de bio.",
+    captionEN: "Jason. Manuel. Tato. Gustavo.\n\nFour names that appear again and again in reviews from the US, Europe, Latin America.\n\nNot a coincidence. It's team culture.\n\nAt Nanku, service isn't a script — it's personal.\n\nCome meet them. Book via link in bio.",
+    cta: "Reservá — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#CostaRicaHospitality","#TeamNanku","#PuraVida","#VisitCostaRica","#ArenalVolcano"],
+    productionNotes: "ÁNGULO ESTRATÉGICO: staff como brand ambassadors. Fotos/video corto de cada uno en acción (sirviendo, preparando). Nombres en pantalla. Auténtico, no corporativo.",
+    status: "pending"
+  },
+  {
+    id: "post-012", date: "2026-05-13",
+    platforms: ["instagram"],
+    format: "Carrusel 6 slides", pillar: "cultura",
+    hook: "Costa Rican food, explained for the first-time visitor.",
+    captionES: "Si es tu primera vez en Costa Rica, esto es lo que tenés que pedir.\n\nGuía rápida de los platos más típicos — y por qué valen la pena.\n\nSlide → y empezá por el principio.",
+    captionEN: "First time in Costa Rica? Here's what to order.\n\nA quick guide to the most traditional dishes — and why they're worth trying.\n\nSwipe → start from the beginning.",
+    cta: "Reservá en Nanku — link en bio",
+    hashtags: ["#CostaRicaFood","#TicoFood","#LaFortuna","#NankuRestaurante","#VisitCostaRica","#FoodGuide","#PuraVida","#ArenalVolcano"],
+    productionNotes: "Slides: (1) Hook, (2) Casado, (3) Ceviche de pulpo, (4) Rice & Beans caribeño, (5) Patacones, (6) CTA Nanku. Bilingüe EN/ES en cada slide. Fondo oscuro, foto de plato real.",
+    status: "pending"
+  },
+  {
+    id: "post-013", date: "2026-05-14",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 25s", pillar: "producto",
+    hook: "Del fuego a la mesa.",
+    captionES: "Este fuego no es decorativo.\n\nEs el mismo fuego que sella cada corte. Que carameliza cada borde. Que hace que tu primer mordida sea diferente a todas las que tuviste antes.\n\nEn Nanku, el show empieza en la parrilla y termina en tu plato.\n\n📍 La Fortuna, Costa Rica\nReservás: link en bio",
+    captionEN: "This fire isn't just for show.\n\nIt's the same fire that sears every cut. That caramelizes every edge. That makes your first bite unlike any you've had before.\n\nAt Nanku, the show starts on the grill and ends on your plate.\n\n📍 La Fortuna, Costa Rica\nReservations: link in bio",
+    cta: "Reservá tu corte — link en bio",
+    hashtags: ["#NankuRestaurante","#DelFuegoALaMesa","#SteakHouse","#FireShow","#LaFortuna","#CostaRicaFood","#ArenalVolcano","#Foodie"],
+    productionNotes: "CONCEPTO 'Del fuego a la mesa'. Cámara lenta: carne → parrilla → llama → emplatado → mesa → cliente. Josu Frames estilo cinematic. Música dramática.",
+    status: "pending"
+  },
+  {
+    id: "post-014", date: "2026-05-15",
+    platforms: ["instagram", "stories"],
+    format: "Foto + Stories", pillar: "musica",
+    hook: "Flamenco viernes.",
+    captionES: "Paco De María toca esta noche en Nanku.\n\nGranada → La Fortuna. Una historia que no termina de sorprender.\n\n7 PM · Entrada libre · Reservas recomendadas\n\nLink en bio.",
+    captionEN: "Paco De María performs tonight at Nanku.\n\nGranada → La Fortuna. A story that keeps surprising.\n\n7 PM · Free entry · Reservations recommended\n\nLink in bio.",
+    cta: "Reservá ahora — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#FlamencoLive","#PacoDeMaría","#ArenalNights","#LiveMusicCR","#FridayVibes"],
+    productionNotes: "Foto editorial: Paco con guitarra, iluminación dramática lateral. Stories: cuenta regresiva + historia de Paco en texto.",
+    status: "pending"
+  },
+  {
+    id: "post-015", date: "2026-05-16",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 20s", pillar: "cultura",
+    hook: "Si tenés 2 noches en La Fortuna, una tiene que ser Nanku.",
+    captionES: "La mayoría de visitantes llega a La Fortuna con 2 o 3 noches.\n\nNanku debería ser una de ellas.\n\nNo porque seamos los únicos. Sino porque fuego, música en vivo, cócteles tiki y cocina tica gourmet en un mismo lugar — bajo las estrellas del Arenal — es difícil de superar.\n\nReservá con anticipación. Se llena rápido. Link en bio.",
+    captionEN: "Most visitors come to La Fortuna with 2 or 3 nights.\n\nNanku should be one of them.\n\nNot because we're the only option. But because fire, live music, tiki cocktails, and gourmet Costa Rican cuisine — all under Arenal's sky — is hard to beat.\n\nBook ahead. It fills fast. Link in bio.",
+    cta: "Reservá antes de llegar — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#ArenalVolcano","#CostaRicaTravel","#VisitArenal","#FoodieTravel","#TravelCostaRica","#ArenalTrip"],
+    productionNotes: "ÁNGULO: ventana de 2-3 noches del turista americano. Video aéreo de La Fortuna + Arenal de fondo, con logo Nanku al final. Urgencia real en el copy.",
+    status: "pending"
+  },
+  {
+    id: "post-016", date: "2026-05-17",
+    platforms: ["stories"],
+    format: "Stories x3", pillar: "ugc",
+    hook: "Top 3 platos pedidos esta semana",
+    captionES: "Stories: (1) 'Esta semana los 3 más pedidos fueron...' + fotos de platos. (2) Encuesta: '¿Ya probaste el ceviche de pulpo?' (3) CTA de reservas para la semana.",
+    captionEN: "Stories: (1) 'This week's top 3 dishes were...' + food photos. (2) Poll: 'Have you tried the octopus ceviche?' (3) Reservations CTA for the week.",
+    cta: "Hacé tu pedido — reservá en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna"],
+    productionNotes: "Stories interactivas con encuesta y slider de rating. UGC reciclado del fin de semana.",
+    status: "pending"
+  },
+  {
+    id: "post-017", date: "2026-05-18",
+    platforms: ["instagram"],
+    format: "Reel 45s", pillar: "cultura",
+    hook: "La historia de Nanku: nació en la selva.",
+    captionES: "Antes de estar en el centro de La Fortuna, Nanku vivía en la selva.\n\nNo es una metáfora. El restaurante nació literalmente en medio de la jungla costarricense — donde el Arenal es una presencia, no un paisaje de fondo.\n\nCon el tiempo encontró su hogar en el corazón del pueblo. Pero la selva nunca se fue. Está en la palapa. En el bambú. En los ingredientes de la granja propia. En el nombre mismo: Nanku — hogar en Chorotega.\n\nAlgunos lugares tienen historia. Nosotros la vivimos.\n\n🎵 Esteban Calero en vivo esta noche — 7 PM",
+    captionEN: "Before its home in La Fortuna's center, Nanku lived in the jungle.\n\nNot a metaphor. The restaurant was literally born in the Costa Rican rainforest — where Arenal is a presence, not just a backdrop.\n\nWith time it found its home in the heart of town. But the jungle never left. It's in the palapa. The bamboo. The farm-to-table ingredients. And the name itself: Nanku — home in Chorotega.\n\nSome places have history. We live ours.\n\n🎵 Esteban Calero live tonight — 7 PM",
+    cta: "Reservá tu noche — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#CostaRicaHistory","#ArenalVolcano","#FarmToTable","#PuraVida","#VisitCostaRica","#ChorotegaCulture"],
+    productionNotes: "ÁNGULO: historia de origen en la selva. Fotos/video del exterior del rancho + interior con detalles de bambú y palapa. Narración con texto en pantalla. Emocional.",
+    status: "pending"
+  },
+  {
+    id: "post-018", date: "2026-05-19",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 20s", pillar: "producto",
+    hook: "El plato que no está en el menú pero todo el mundo pide.",
+    captionES: "Hay cosas que solo sabés si venís.\n\nNuestro coconut shrimp es el plato más mencionado en las reseñas de visitantes de todo el mundo — y no lo vas a encontrar en el menú oficial.\n\nEs un especial. Aparece cuando aparece. Preguntá a tu mesero.\n\nUna razón más para reservar y venir a ver qué hay.\n\nLink en bio.",
+    captionEN: "Some things you only know if you show up.\n\nOur coconut shrimp is the most mentioned dish in reviews from visitors around the world — and you won't find it on the official menu.\n\nIt's a special. It appears when it appears. Ask your server.\n\nOne more reason to book and come find out what's on.\n\nLink in bio.",
+    cta: "Reservá y descubrí — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#SecretMenu","#CoconutShrimp","#CostaRicaFood","#Foodie","#ArenalVolcano","#HiddenGem"],
+    productionNotes: "NOTA CRÍTICA: confirmar con el cliente si el coconut shrimp existe como especial rotativo antes de publicar. Si está disponible → foto del plato real. Si no → ajustar copy a 'especiales del chef'.",
+    status: "pending"
+  },
+  {
+    id: "post-019", date: "2026-05-20",
+    platforms: ["instagram"],
+    format: "Carrusel 5 slides", pillar: "cultura",
+    hook: "5 cosas para hacer en La Fortuna antes de cenar en Nanku.",
+    captionES: "Itinerario del día perfecto en La Fortuna:\n\n☀️ Mañana → Arenal Volcano National Park\n🌊 Tarde → Aguas termales\n🌿 Tardecita → Tour de aventura (Sky Adventures, Canoa)\n🌅 Golden hour → Foto con el volcán\n🍖 Noche → Nanku\n\nAsy se hace. Link de reservas en bio.",
+    captionEN: "The perfect La Fortuna day:\n\n☀️ Morning → Arenal Volcano National Park\n🌊 Afternoon → Hot springs\n🌿 Late afternoon → Adventure tour (Sky Adventures, canoe)\n🌅 Golden hour → Volcano photo\n🍖 Night → Nanku\n\nThat's how it's done. Reservations link in bio.",
+    cta: "Terminá el día en Nanku — link en bio",
+    hashtags: ["#LaFortuna","#ArenalVolcano","#CostaRicaTravel","#NankuRestaurante","#LaFortunaGuide","#VisitCostaRica","#PuraVida","#ArenalTrip"],
+    productionNotes: "ÁNGULO: 1.5M visitantes al Parque Arenal — posicionamos Nanku como el cierre perfecto del día de turista. Carrusel con foto para cada actividad. Slide final: Nanku de noche.",
+    status: "pending"
+  },
+  {
+    id: "post-020", date: "2026-05-21",
+    platforms: ["instagram"],
+    format: "Foto editorial", pillar: "producto",
+    hook: "Nanku After Dark.",
+    captionES: "Cuando baja el sol sobre el Arenal, Nanku enciende.\n\nLuces cálidas. Fuego real. Música que llena el rancho.\n\nNo hay noche igual en La Fortuna.\n\n📍 Calle 142, centro de La Fortuna\nReservas → link en bio",
+    captionEN: "When the sun drops over Arenal, Nanku lights up.\n\nWarm lights. Real fire. Music that fills the rancho.\n\nNo night like it in La Fortuna.\n\n📍 Calle 142, La Fortuna center\nReservations → link in bio",
+    cta: "Reservá tu noche — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#NankuAfterDark","#ArenalNights","#CostaRicaFood","#TropicalDining","#NightLife","#ArenalVolcano"],
+    productionNotes: "Foto cinematográfica del exterior de noche: letrero NANKU iluminado + gente adentro visible + Edison bulbs. ISO alto, fondo oscuro, cálido.",
+    status: "pending"
+  },
+  {
+    id: "post-021", date: "2026-05-22",
+    platforms: ["instagram", "stories"],
+    format: "Reel 25s", pillar: "musica",
+    hook: "Granada → La Fortuna. La historia de Paco De María.",
+    captionES: "Nació en Granada, España. Creció tocando flamenco gitano.\n\nRecorrió Europa. Llegó a América Latina. Y esta noche toca en Nanku, La Fortuna.\n\nHay músicos que encuentran su escenario perfecto lejos de casa.\n\nPaco De María. Esta noche. 7 PM.\n\nReservás: link en bio.",
+    captionEN: "Born in Granada, Spain. Grew up playing Romani flamenco.\n\nToured Europe. Came to Latin America. And tonight plays at Nanku, La Fortuna.\n\nSome musicians find their perfect stage far from home.\n\nPaco De María. Tonight. 7 PM.\n\nBook: link in bio.",
+    cta: "Reservá esta noche — link en bio",
+    hashtags: ["#NankuRestaurante","#PacoDeMaría","#Flamenco","#LaFortuna","#LiveMusicCR","#ArenalNights","#FridayNight","#CostaRicaTravel"],
+    productionNotes: "Reel storytelling: fotos de Paco tocando + texto en pantalla contando su historia. Corte rápido con música flamenca de fondo.",
+    status: "pending"
+  },
+  {
+    id: "post-022", date: "2026-05-23",
+    platforms: ["tiktok", "instagram"],
+    format: "Reel 20s", pillar: "producto",
+    hook: "Tiki Saturday: el cóctel que solo existe en Nanku.",
+    captionES: "El Nanku Signature Tiki:\n\nRon oscuro + ron blanco + limón + jarabe de canela + beso de mango.\n\nServido en vasija coleccionable tiki.\n\nUna sola sip y La Fortuna golpea diferente.\n\n₡8,000 · Solo en Nanku · La Fortuna\nReservás: link en bio",
+    captionEN: "The Nanku Signature Tiki:\n\nDark rum + white rum + lime + cinnamon syrup + kiss of mango.\n\nServed in a collectible tiki vessel.\n\nOne sip and La Fortuna hits different.\n\n₡8,000 · Only at Nanku · La Fortuna\nBook: link in bio",
+    cta: "Pedí el tuyo esta noche — link en bio",
+    hashtags: ["#NankuRestaurante","#TikiCocktails","#LaFortuna","#SaturdayNight","#CostaRicaCocktails","#TropicalDrinks","#ArenalNights","#Bartender"],
+    productionNotes: "Primer plano del cóctel Nanku Signature con llamas o humo decorativo. Cámara lenta. Nombre del cóctel en pantalla con tipografía bold.",
+    status: "pending"
+  },
+  {
+    id: "post-023", date: "2026-05-24",
+    platforms: ["stories"],
+    format: "Stories x3", pillar: "ugc",
+    hook: "¿Qué fue lo mejor de tu semana en Nanku?",
+    captionES: "Stories: (1) Encuesta 'Mejor plato de la semana'. (2) Reposteá UGC del fin de semana. (3) 'Quedan mesas para la semana — reservá ahora'.",
+    captionEN: "Stories: (1) Poll 'Best dish of the week'. (2) Repost weekend UGC. (3) 'Tables available this week — book now'.",
+    cta: "Reservá ahora — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna"],
+    productionNotes: "Stories interactivas. Preguntar a seguidores qué plato o cóctel les gustó más.",
+    status: "pending"
+  },
+  {
+    id: "post-024", date: "2026-05-25",
+    platforms: ["instagram"],
+    format: "Carrusel 5 slides", pillar: "ugc",
+    hook: "Por qué la gente vuelve a Nanku.",
+    captionES: "Desde 2018, cada reseña de Nanku en Tripadvisor recibe una respuesta personal.\n\nDetrás de esa respuesta hay una historia: la de las personas que construyeron este lugar desde la selva hasta el centro de La Fortuna.\n\nLas mejores reseñas de este año — en las palabras de quienes se sentaron en estas mesas:\n\n→ Slide para leer\n\n🎵 Esteban Calero en vivo esta noche — 7 PM",
+    captionEN: "Since 2018, every Nanku review on TripAdvisor gets a personal response.\n\nBehind that response is a story: the people who built this place from the jungle to the heart of La Fortuna.\n\nThe best reviews of this year — in the words of the people who sat at these tables:\n\n→ Swipe to read\n\n🎵 Esteban Calero live tonight — 7 PM",
+    cta: "Viví tu propia experiencia — reservá en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#TripAdvisor","#TravelersChoice","#CostaRicaFood","#ArenalVolcano","#LiveMusicCR","#PuraVida"],
+    productionNotes: "ÁNGULO: Laura C responde reseñas desde 2018. Slides con capturas de reseñas reales (con permiso/anonimizadas si es necesario). Slide final: foto del local con 'Bienvenidos a Nanku'.",
+    status: "pending"
+  },
+  {
+    id: "post-025", date: "2026-05-26",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 25s", pillar: "producto",
+    hook: "Cómo se prepara nuestro Surf and Turf. El rey del menú.",
+    captionES: "₡31,900.\n\nEl precio más alto del menú de Nanku.\n\nY el que más piden.\n\nMar + tierra. Corte premium + langostinos frescos del Pacífico. Fire show incluido.\n\nTe mostramos cómo nace.\n\nReservá tu Surf and Turf — link en bio.",
+    captionEN: "₡31,900.\n\nThe highest priced item on the Nanku menu.\n\nAnd the most ordered.\n\nSea + land. Premium cut + fresh Pacific prawns. Fire show included.\n\nWe show you how it's made.\n\nBook your Surf and Turf — link in bio.",
+    cta: "Reservá — link en bio",
+    hashtags: ["#NankuRestaurante","#SurfAndTurf","#LaFortuna","#SteakHouse","#SeaFood","#FireShow","#CostaRicaFood","#Foodie"],
+    productionNotes: "Behind the scenes de cocina: corte de la carne, preparación de mariscos, fire show en parrilla, emplatado. Cámara rápida intercalada con slow mo del fuego.",
+    status: "pending"
+  },
+  {
+    id: "post-026", date: "2026-05-27",
+    platforms: ["instagram"],
+    format: "Carrusel 5 slides", pillar: "ugc",
+    hook: "Las 5 mejores reseñas de Nanku en lo que va del año.",
+    captionES: "1,404 reseñas en Tripadvisor. 1,214 en Google.\n\nEstas son las 5 que más nos movieron.\n\nSlide →",
+    captionEN: "1,404 reviews on TripAdvisor. 1,214 on Google.\n\nThese are the 5 that moved us most.\n\nSwipe →",
+    cta: "Escribí la tuya — reservá en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#TripAdvisor","#GoogleReviews","#CostaRicaFood","#BestRestaurantArenal","#PuraVida"],
+    productionNotes: "5 reseñas reales tipografiadas en fondo oscuro con nombre del país del reviewer. Slide final: foto del local + CTA.",
+    status: "pending"
+  },
+  {
+    id: "post-027", date: "2026-05-28",
+    platforms: ["instagram"],
+    format: "Foto + caption", pillar: "cultura",
+    hook: "Detrás de Nanku hay una historia que no te contamos todavía.",
+    captionES: "Cada reseña de Nanku en Tripadvisor tiene respuesta.\n\nDesde 2018.\n\nHay alguien que las lee todas. Que agradece cada una. Que siente cada crítica como propia.\n\nEsa persona construyó Nanku desde la selva hasta donde está hoy.\n\nPronto, su historia.\n\n📍 La Fortuna, Costa Rica",
+    captionEN: "Every Nanku TripAdvisor review has a response.\n\nSince 2018.\n\nSomeone reads them all. Thanks each one. Feels every criticism personally.\n\nThat person built Nanku from the jungle to where it stands today.\n\nSoon, their story.\n\n📍 La Fortuna, Costa Rica",
+    cta: "Seguinos para no perderte la historia",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#BehindTheRestaurant","#CostaRicaBusiness","#ArenalVolcano","#PuraVida","#RestaurantStory"],
+    productionNotes: "ÁNGULO: Laura C como activo de humanización. IMPORTANTE: post de anticipación — confirmar con Laura C antes de publicar. Si aprueba: foto de ella en el restaurante. Si no: foto del restaurante sin persona identificada.",
+    status: "pending"
+  },
+  {
+    id: "post-028", date: "2026-05-29",
+    platforms: ["instagram", "stories"],
+    format: "Reel 20s", pillar: "musica",
+    hook: "Última noche flamenca de mayo.",
+    captionES: "Mayo cierra con Paco De María.\n\nÚltima noche de flamenco del mes. El último viernes antes de junio.\n\nSi no lo viste este mes — esta es tu última oportunidad.\n\n7 PM · Nanku · La Fortuna\nReservás: link en bio.",
+    captionEN: "May closes with Paco De María.\n\nThe last flamenco night of the month. The last Friday before June.\n\nIf you haven't seen it this month — this is your last chance.\n\n7 PM · Nanku · La Fortuna\nBook: link in bio.",
+    cta: "Esta es la noche — reservá en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#FlamencoCR","#PacoDeMaría","#LastFriday","#ArenalNights","#LiveMusicCR"],
+    productionNotes: "URGENCIA real en el copy — último viernes del mes. Foto o video de Paco en acción con letrero del mes en overlay.",
+    status: "pending"
+  },
+  {
+    id: "post-029", date: "2026-05-30",
+    platforms: ["instagram", "tiktok"],
+    format: "Reel 30s", pillar: "ugc",
+    hook: "Lo mejor de mayo en Nanku. Un mes en 30 segundos.",
+    captionES: "Fuego. Música. Tikis. Reseñas. Staff. Historia.\n\nMayo en Nanku fue todo esto — y más.\n\nGracias por ser parte.\n\nJunio viene con más. Seguinos para no perderte nada.\n\n📍 La Fortuna, Costa Rica",
+    captionEN: "Fire. Music. Tikis. Reviews. Staff. Story.\n\nMay at Nanku was all of this — and more.\n\nThank you for being part of it.\n\nJune comes with more. Follow us to stay tuned.\n\n📍 La Fortuna, Costa Rica",
+    cta: "Seguinos — más viene en junio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#MayoNanku","#CostaRicaFood","#ArenalVolcano","#PuraVida","#Recap"],
+    productionNotes: "Montaje de los mejores clips/fotos del mes. 1 segundo por momento. Música upbeat. Formato recap estilo 'best of'. Último frame: logo Nanku + 'Hasta junio'.",
+    status: "pending"
+  },
+  {
+    id: "post-030", date: "2026-05-31",
+    platforms: ["stories", "instagram"],
+    format: "Stories + Foto", pillar: "cultura",
+    hook: "Lo que viene en junio.",
+    captionES: "Mayo fue el comienzo.\n\nJunio llega con nuevas noches de música, nuevos platos especiales y nuevas historias por contar.\n\nEstás listo?\n\nReservá tu primera noche de junio — link en bio.",
+    captionEN: "May was just the beginning.\n\nJune arrives with new music nights, new special dishes, and new stories to tell.\n\nAre you ready?\n\nBook your first June night — link in bio.",
+    cta: "Reservá junio — link en bio",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#ComingInJune","#CostaRicaTravel","#ArenalVolcano","#PuraVida"],
+    productionNotes: "Foto del restaurante vacío antes de abrir — mood de anticipación. Stories interactivas: '¿Qué querés ver en junio?' con encuesta.",
+    status: "pending"
+  }
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let state = {
+  view: 'calendario',
+  filters: {
+    platforms: new Set(),
+    pillars: new Set(),
+    status: 'all'
+  },
+  postStatuses: {}
+};
+
+// Initialize statuses from data
+posts.forEach(p => { state.postStatuses[p.id] = p.status; });
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function getPostsByDate(date) {
+  return posts.filter(p => p.date === date);
+}
+
+function getFilteredPosts() {
+  return posts.filter(p => {
+    const f = state.filters;
+    if (f.platforms.size > 0) {
+      const hasPlat = p.platforms.some(pl => f.platforms.has(pl));
+      if (!hasPlat) return false;
+    }
+    if (f.pillars.size > 0 && !f.pillars.has(p.pillar)) return false;
+    const status = state.postStatuses[p.id];
+    if (f.status !== 'all' && status !== f.status) return false;
+    return true;
+  });
+}
+
+function formatDate(dateStr) {
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m-1, d);
+  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  return `${days[date.getDay()]}, ${d} de ${months[m-1]} de ${y}`;
+}
+
+function shortDate(dateStr) {
+  const [,m,d] = dateStr.split('-').map(Number);
+  const months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  return `${String(d).padStart(2,'0')} ${months[m-1]}`;
+}
+
+function pillarColor(p) {
+  return PILLAR_META[p]?.color || '#fff';
+}
+
+function platformBadge(platform) {
+  const map = {
+    instagram: `<span class="plat-badge ig">IG</span>`,
+    tiktok: `<span class="plat-badge tiktok">TT</span>`,
+    facebook: `<span class="plat-badge fb">FB</span>`,
+    stories: `<span class="plat-badge stories">ST</span>`,
+  };
+  return map[platform] || `<span class="plat-badge">${platform.toUpperCase()}</span>`;
+}
+
+// ─── STATS ───────────────────────────────────────────────────────────────────
+function countPkgDelivered(postIds) {
+  return postIds.filter(id => {
+    const s = state.postStatuses[id];
+    return s === 'ready' || s === 'published';
+  }).length;
+}
+
+function fmtPkg(done, total) {
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  return `${done}<span style="font-size:13px;font-weight:400;color:${done >= total && total > 0 ? 'var(--color-success)' : 'var(--color-text-muted)'}">/${total}</span>`;
+}
+
+function updateStats() {
+  const fp = getFilteredPosts();
+  const carruseles = fp.filter(p => p.format.toLowerCase().includes('carrusel')).length;
+
+  // Paquete entregables
+  const { videoComercial, reels, bts } = PACKAGE.deliverables;
+  const vcDone  = countPkgDelivered(videoComercial.postIds);
+  const relDone = countPkgDelivered(reels.postIds);
+  const btsDone = countPkgDelivered(bts.postIds);
+  const totalDone  = vcDone + relDone + btsDone;
+  const totalPkg   = videoComercial.total + reels.total + bts.total;
+
+  document.getElementById('stat-video-pkg').innerHTML  = fmtPkg(vcDone,  videoComercial.total);
+  document.getElementById('stat-reels-pkg').innerHTML  = fmtPkg(relDone, reels.total);
+  document.getElementById('stat-bts-pkg').innerHTML    = fmtPkg(btsDone, bts.total);
+  document.getElementById('stat-total-pkg').innerHTML  = fmtPkg(totalDone, totalPkg);
+
+  // Calendario general
+  document.getElementById('stat-total').textContent       = fp.length;
+  document.getElementById('stat-carruseles').textContent  = carruseles;
+  document.getElementById('stat-music').textContent       = Object.keys(LIVE_MUSIC).length;
+  document.getElementById('stat-strategic').textContent   = fp.filter(p => p.productionNotes.toLowerCase().includes('ángulo')).length;
+}
+
+// ─── CALENDAR ────────────────────────────────────────────────────────────────
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const TODAY    = '2026-05-04';
+  const TOMORROW = '2026-05-05';
+
+  // Grid starts Mon Apr 27
+  const cells = [];
+  // Apr 27-30 (prev month)
+  for (let d = 27; d <= 30; d++) {
+    cells.push({ date: `2026-04-${String(d).padStart(2,'0')}`, inMonth: false, day: d, monthLabel: 'ABR' });
+  }
+  // May 1-31
+  for (let d = 1; d <= 31; d++) {
+    cells.push({ date: `2026-05-${String(d).padStart(2,'0')}`, inMonth: true, day: d, monthLabel: 'MAY' });
+  }
+  // Jun 1-2
+  cells.push({ date: '2026-06-01', inMonth: false, day: 1, monthLabel: 'JUN' });
+  cells.push({ date: '2026-06-02', inMonth: false, day: 2, monthLabel: 'JUN' });
+
+  const fp = getFilteredPosts();
+  const fpDates = new Set(fp.map(p => p.date));
+
+  cells.forEach(cell => {
+    const div = document.createElement('div');
+    div.className = 'cal-day' + (!cell.inMonth ? ' other-month' : '');
+    if (cell.date === TODAY) div.classList.add('today');
+    if (cell.date === TOMORROW) div.classList.add('tomorrow');
+    if (cell.inMonth && cell.date < TODAY) div.classList.add('past');
+
+    const dayPosts = posts.filter(p => p.date === cell.date);
+    const filteredDayPosts = fp.filter(p => p.date === cell.date);
+
+    if (cell.inMonth && dayPosts.length > 0 && filteredDayPosts.length === 0 && fp.length < posts.length) {
+      div.classList.add('filtered-out');
+    }
+
+    const music = LIVE_MUSIC[cell.date];
+    const hasFeed = dayPosts.some(p => !p.platforms.every(pl => pl === 'stories'));
+    const hasStories = dayPosts.some(p => p.platforms.includes('stories'));
+
+    // Dots
+    let dotsHTML = '';
+    if (hasFeed) dotsHTML += `<span class="dot dot-feed"></span>`;
+    if (music) dotsHTML += `<span class="dot dot-music"></span>`;
+    if (hasStories) dotsHTML += `<span class="dot dot-stories"></span>`;
+
+    // Date number
+    const todayBadge = cell.date === TODAY
+      ? `<span class="today-badge">HOY</span>`
+      : cell.date === TOMORROW
+        ? `<span class="tomorrow-badge">MAÑANA</span>`
+        : (cell.inMonth && cell.date < TODAY)
+          ? `<span class="past-badge">pasado</span>`
+          : '';
+    const numLabel = cell.inMonth ? cell.day : `<span style="font-size:9px;opacity:0.6;">${cell.monthLabel}</span> ${cell.day}`;
+
+    // Post previews
+    let previewHTML = '';
+    const showPosts = filteredDayPosts.length > 0 ? filteredDayPosts : dayPosts;
+    showPosts.slice(0,3).forEach(p => {
+      const status = state.postStatuses[p.id];
+      const statusClass = `status-${status === 'pending' ? 'pending' : status === 'production' ? 'production' : status === 'ready' || status === 'published' ? 'ready' : 'pending'}`;
+      previewHTML += `<div class="cal-post-pill pillar-${p.pillar}">
+        <span class="status-dot ${statusClass}"></span>${p.hook.substring(0,38)}${p.hook.length > 38 ? '…' : ''}
+      </div>`;
+    });
+    if (dayPosts.length === 0 && cell.inMonth) {
+      previewHTML = `<div class="empty-day">—</div>`;
+    }
+
+    div.innerHTML = `
+      <div class="cal-day-num">${numLabel} ${todayBadge}</div>
+      <div class="cal-dots">${dotsHTML}</div>
+      <div class="cal-posts-preview">${previewHTML}</div>
+    `;
+
+    if (cell.inMonth && dayPosts.length > 0) {
+      div.addEventListener('click', () => openModal(cell.date));
+    }
+
+    grid.appendChild(div);
+  });
+}
+
+// ─── LIST VIEW ───────────────────────────────────────────────────────────────
+function buildList() {
+  const container = document.getElementById('listView');
+  container.innerHTML = '';
+  const fp = getFilteredPosts();
+
+  if (fp.length === 0) {
+    container.innerHTML = `<div style="padding:40px;text-align:center;font-family:var(--font-mono);color:var(--color-text-muted);font-size:13px;">No hay posts que coincidan con los filtros activos.</div>`;
+    return;
+  }
+
+  fp.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    const status = state.postStatuses[p.id];
+    div.innerHTML = `
+      <div class="list-date"><span class="status-dot ${STATUS_META[status]?.dotClass}"></span>${shortDate(p.date)} · ${formatDate(p.date).split(',')[0]}</div>
+      <div class="list-platform-badges">${p.platforms.map(platformBadge).join('')}</div>
+      <div class="list-format">${p.format}</div>
+      <div class="list-hook">${p.hook}</div>
+      <div class="list-pillar ${p.pillar}">${PILLAR_META[p.pillar]?.label}</div>
+    `;
+    div.addEventListener('click', () => openModal(p.date, p.id));
+    container.appendChild(div);
+  });
+}
+
+// ─── PILARES VIEW ────────────────────────────────────────────────────────────
+function buildPilares() {
+  const grid = document.getElementById('pilaresGrid');
+  grid.innerHTML = '';
+  const fp = getFilteredPosts();
+
+  Object.entries(PILLAR_META).forEach(([key, meta]) => {
+    const pillarPosts = fp.filter(p => p.pillar === key);
+    const section = document.createElement('div');
+    section.className = 'pilar-section';
+    section.innerHTML = `
+      <div class="pilar-header">
+        <div class="pilar-title">
+          <span class="pilar-dot" style="background:${meta.color};"></span>
+          ${meta.label}
+        </div>
+        <div class="pilar-count">${pillarPosts.length} post${pillarPosts.length !== 1 ? 's' : ''}</div>
+      </div>
+      <div class="pilar-posts" id="pilar-${key}"></div>
+    `;
+    grid.appendChild(section);
+
+    const postsContainer = section.querySelector(`#pilar-${key}`);
+    if (pillarPosts.length === 0) {
+      postsContainer.innerHTML = `<div style="padding:20px;font-family:var(--font-mono);font-size:11px;color:var(--color-text-muted);">Sin posts con filtros activos.</div>`;
+      return;
+    }
+    pillarPosts.forEach(p => {
+      const status = state.postStatuses[p.id];
+      const item = document.createElement('div');
+      item.className = 'pilar-post';
+      item.innerHTML = `
+        <div class="pilar-post-date">${shortDate(p.date)}</div>
+        <div class="pilar-post-info">
+          <div class="pilar-post-hook">${p.hook}</div>
+          <div class="pilar-post-meta">
+            ${p.platforms.map(platformBadge).join('')}
+            <span class="format-tag" style="font-size:9px;padding:2px 6px;">${p.format}</span>
+            <span class="status-dot ${STATUS_META[status]?.dotClass}"></span>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-text-muted);">${STATUS_META[status]?.label}</span>
+          </div>
+        </div>
+      `;
+      item.addEventListener('click', () => openModal(p.date, p.id));
+      postsContainer.appendChild(item);
+    });
+  });
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+let currentModalDate = null;
+let currentModalPostId = null;
+
+function openModal(date, postId = null) {
+  currentModalDate = date;
+  const dayPosts = posts.filter(p => p.date === date);
+  if (dayPosts.length === 0) return;
+
+  currentModalPostId = postId || dayPosts[0].id;
+
+  const backdrop = document.getElementById('modalBackdrop');
+  document.getElementById('modalDate').textContent = formatDate(date);
+
+  // Tabs
+  const tabsEl = document.getElementById('modalPostTabs');
+  tabsEl.innerHTML = '';
+  if (dayPosts.length > 1) {
+    dayPosts.forEach((p, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'modal-post-tab' + (p.id === currentModalPostId ? ' active' : '');
+      btn.textContent = `Post ${i+1} · ${p.format}`;
+      btn.addEventListener('click', () => {
+        currentModalPostId = p.id;
+        document.querySelectorAll('.modal-post-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        renderModalBody(p);
+      });
+      tabsEl.appendChild(btn);
+    });
+  }
+
+  const post = dayPosts.find(p => p.id === currentModalPostId) || dayPosts[0];
+  renderModalBody(post);
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderModalBody(post) {
+  const body = document.getElementById('modalBody');
+  const status = state.postStatuses[post.id];
+  const music = LIVE_MUSIC[post.date];
+
+  const musicNote = music ? `
+    <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.3);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="background:var(--color-music);width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;margin-top:3px;"></span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--color-music);font-weight:700;letter-spacing:0.08em;">
+          MÚSICA EN VIVO · ${music.day.toUpperCase()} · 7 PM
+        </div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:rgba(167,139,250,0.55);margin-top:5px;line-height:1.5;">
+          Artista de esta noche: <strong style="color:rgba(167,139,250,0.9);">pendiente — consultar con el cliente</strong><br>
+          Roster disponible: Esteban Calero · Paco De María · Chalo Gonzales · Chris Charía · Bryan Villalobos · Nathan Bolívar · Andrés Rojas
+        </div>
+      </div>
+    </div>
+  ` : '';
+
+  body.innerHTML = `
+    ${musicNote}
+    <div class="modal-badges">
+      ${post.platforms.map(platformBadge).join('')}
+      <span class="format-tag">${post.format}</span>
+      <span class="pillar-tag ${post.pillar}">${PILLAR_META[post.pillar]?.label}</span>
+    </div>
+
+    <div class="modal-hook">${post.hook}</div>
+
+    <div class="caption-block lang-es">
+      <button class="caption-toggle lang-es-toggle open" id="toggleES-${post.id}">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+          <span class="caption-lang-badge es-badge">ES · ESPAÑOL</span>
+          <span class="caption-lang-note">Para mercado tico y regional</span>
+        </div>
+        <span class="caption-chevron">▲</span>
+      </button>
+      <div class="caption-content visible" id="captionES-${post.id}" style="border-left:3px solid rgba(255,107,43,0.3);margin-left:0;">${escapeHTML(post.captionES)}</div>
+      <div class="caption-actions visible" id="actionsES-${post.id}">
+        <button class="btn-copy" data-copy="${post.id}" data-lang="es">Copiar Caption ES</button>
+      </div>
+    </div>
+
+    <div class="caption-block lang-en" style="margin-top:4px;">
+      <button class="caption-toggle lang-en-toggle" id="toggleEN-${post.id}">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+          <span class="caption-lang-badge en-badge">EN · ENGLISH</span>
+          <span class="caption-lang-note">For international tourists</span>
+        </div>
+        <span class="caption-chevron">▼</span>
+      </button>
+      <div class="caption-content" id="captionEN-${post.id}" style="border-left:3px solid rgba(74,158,255,0.3);margin-left:0;">${escapeHTML(post.captionEN)}</div>
+      <div class="caption-actions" id="actionsEN-${post.id}">
+        <button class="btn-copy" data-copy="${post.id}" data-lang="en">Copiar Caption EN</button>
+      </div>
+    </div>
+
+    <div class="modal-cta">
+      <span class="cta-label">CTA</span>
+      <span class="cta-value">${post.cta}</span>
+    </div>
+
+    <div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Hashtags</div>
+      <div class="hashtags-block">${post.hashtags.map(h => `<span class="hashtag-chip">${h}</span>`).join('')}</div>
+    </div>
+
+    <div class="prod-notes">
+      <div class="prod-notes-label">Notas de producción</div>
+      <div class="prod-notes-text">${escapeHTML(post.productionNotes)}</div>
+    </div>
+
+    <div class="status-row">
+      <span class="status-label">Estado</span>
+      <select class="status-select" id="statusSelect-${post.id}">
+        <option value="pending" ${status === 'pending' ? 'selected' : ''}>Pendiente</option>
+        <option value="production" ${status === 'production' ? 'selected' : ''}>En producción</option>
+        <option value="ready" ${status === 'ready' ? 'selected' : ''}>Listo</option>
+        <option value="published" ${status === 'published' ? 'selected' : ''}>Publicado</option>
+      </select>
+    </div>
+  `;
+
+  // Caption toggles
+  ['ES','EN'].forEach(lang => {
+    const btn = document.getElementById(`toggle${lang}-${post.id}`);
+    const content = document.getElementById(`caption${lang}-${post.id}`);
+    const actions = document.getElementById(`actions${lang}-${post.id}`);
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const isOpen = btn.classList.contains('open');
+      btn.classList.toggle('open', !isOpen);
+      content.classList.toggle('visible', !isOpen);
+      actions.classList.toggle('visible', !isOpen);
+      btn.querySelector('.caption-chevron').textContent = !isOpen ? '▲' : '▼';
+    });
+  });
+
+  // Copy buttons
+  body.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.copy;
+      const lang = btn.dataset.lang;
+      const post = posts.find(p => p.id === id);
+      const text = lang === 'es' ? post.captionES : post.captionEN;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      }).catch(() => {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const orig = btn.textContent;
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      });
+    });
+  });
+
+  // Status change
+  const sel = document.getElementById(`statusSelect-${post.id}`);
+  if (sel) {
+    sel.addEventListener('change', () => {
+      state.postStatuses[post.id] = sel.value;
+      renderViews();
+    });
+  }
+}
+
+function escapeHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function renderViews() {
+  buildCalendar();
+  if (state.view === 'lista') buildList();
+  if (state.view === 'pilares') buildPilares();
+  updateStats();
+}
+
+function switchView(view) {
+  state.view = view;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(`view-${view}`).classList.add('active');
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+
+  if (view === 'lista') buildList();
+  if (view === 'pilares') buildPilares();
+}
+
+// ─── EVENT LISTENERS ─────────────────────────────────────────────────────────
+
+// View tabs
+document.querySelectorAll('.view-tab').forEach(btn => {
+  btn.addEventListener('click', () => switchView(btn.dataset.view));
+});
+
+// Filters
+document.querySelectorAll('[data-filter]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const filterType = chip.dataset.filter;
+    const value = chip.dataset.value;
+
+    if (filterType === 'platform') {
+      chip.classList.toggle('active');
+      if (state.filters.platforms.has(value)) {
+        state.filters.platforms.delete(value);
+      } else {
+        state.filters.platforms.add(value);
+      }
+    } else if (filterType === 'pillar') {
+      chip.classList.toggle('active');
+      if (state.filters.pillars.has(value)) {
+        state.filters.pillars.delete(value);
+      } else {
+        state.filters.pillars.add(value);
+      }
+    } else if (filterType === 'status') {
+      document.querySelectorAll('[data-filter="status"]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.filters.status = value;
+    }
+
+    renderViews();
+  });
+});
+
+// Modal close
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalBackdrop')) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Month nav (visual only)
+document.querySelectorAll('.month-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Visual feedback only
+    btn.style.borderColor = 'var(--color-accent)';
+    btn.style.color = 'var(--color-accent)';
+    setTimeout(() => {
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 400);
+  });
+});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+buildCalendar();
+updateStats();
+</script>
+</body>
+</html>
