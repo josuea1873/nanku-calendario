@@ -250,6 +250,7 @@
   .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(120px, auto);
     gap: 2px;
   }
 
@@ -797,10 +798,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #444;
+    color: #3a3a3a;
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 9px;
+    letter-spacing: 0.05em;
     flex: 1;
+    text-transform: uppercase;
+    border: 1px dashed #1e1e1e;
+    margin: 4px;
+    border-radius: 2px;
   }
 
   /* ─── SCROLL BAR ─────────────────────────────────────── */
@@ -1567,8 +1573,8 @@
       <div class="posdata-card">
         <div class="posdata-card-num">06</div>
         <div class="posdata-card-title">Una historia de origen que nadie cuenta todavía</div>
-        <div class="posdata-card-body">Nanku <strong>nació en la selva y se trasladó al centro de La Fortuna</strong>. Esa narrativa de autenticidad — combinada con el significado Chorotega del nombre ("hogar") — es exactamente el tipo de historia que conecta con el turista experiencial de alto poder adquisitivo. No es marketing fabricado. Es arqueología de marca real.</div>
-        <div class="posdata-card-data">Activo verificado: historia de origen · Competidores contando esta historia: 0 · Costo de producción: bajo</div>
+        <div class="posdata-card-body">Nanku <strong>nació como restaurante familiar</strong>. El nombre viene del Chorotega y significa <strong>casa o choza</strong> — no solo "hogar". El concepto es un lugar que acoge a sus comensales de manera cálida, como si estuvieran en casa. Esa narrativa de autenticidad — combinada con el origen familiar y el significado Chorotega — es exactamente el tipo de historia que conecta con el turista experiencial. <em>(Nota: eliminar toda referencia a "nació en la selva" — narrativa incorrecta.)</em></div>
+        <div class="posdata-card-data">Activo verificado: restaurante familiar · Nanku = casa/choza (Chorotega) · Concepto: acogida cálida como en casa</div>
       </div>
 
       <div class="posdata-card">
@@ -1671,11 +1677,11 @@ const posts = [
     format: "Video Comercial 30-45s", pillar: "cultura",
     postType: "filming",
     engagement: "¿Sabías qué significa Nanku? Comentá abajo 👇 · Guardá este post antes de tu viaje a La Fortuna 📌",
-    captionES: "Nanku.\n\nUna palabra de la lengua Chorotega — el pueblo originario de Costa Rica — que significa hogar.\n\nNo le pusimos ese nombre por accidente.\n\nEste restaurante nació en la selva, cruzó la jungla y encontró su lugar en el corazón de La Fortuna. Hoy, amigos, familias y viajeros de todo el mundo se sientan bajo el mismo techo de palma a compartir algo real.\n\nBienvenidos a Nanku. Su hogar en el Arenal.",
-    captionEN: "Nanku.\n\nA word from the Chorotega language — Costa Rica's indigenous people — meaning home.\n\nWe didn't choose that name by accident.\n\nThis restaurant was born in the jungle, found its way to the heart of La Fortuna, and became a place where travelers from every corner of the world sit under the same palm roof and share something real.\n\nWelcome to Nanku. Your home at Arenal.",
+    captionES: "Nanku.\n\nUna palabra de la lengua Chorotega — el pueblo originario de Costa Rica — que significa casa, choza. El lugar que acoge.\n\nNo le pusimos ese nombre por accidente.\n\nEste restaurante nació como un proyecto familiar. Con la misión de que cada persona que entrara se sintiera como en casa — bien recibida, bien atendida, bien alimentada.\n\nHoy, amigos, familias y viajeros de todo el mundo se sientan bajo el mismo techo a compartir algo real.\n\nBienvenidos a Nanku. Su casa en el Arenal.",
+    captionEN: "Nanku.\n\nA word from the Chorotega language — Costa Rica's indigenous people — meaning house, shelter. A place that welcomes.\n\nWe didn't choose that name by accident.\n\nThis restaurant was born as a family project. With a simple mission: that every person who walked in would feel at home — welcomed, cared for, well fed.\n\nToday, friends, families and travelers from around the world gather under the same roof to share something real.\n\nWelcome to Nanku. Your home at Arenal.",
     cta: "Reservá tu noche — link en bio",
-    hashtags: ["#NankuRestaurante","#LaFortuna","#ArenalVolcano","#CostaRicaCulture","#ChorotegaCulture","#PuraVida","#VisitCostaRica","#ArenalTrip"],
-    productionNotes: "VIDEO COMERCIAL — Jornada de grabación. ÁNGULO: origen en la selva + significado Chorotega. Tomas: exterior rancho de noche, manos compartiendo comida, letrero NANKU. Narración en off o texto en pantalla. Música ambient tropical. Josu Frames.",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#ArenalVolcano","#CostaRicaCulture","#ChorotegaCulture","#PuraVida","#VisitCostaRica","#RestauranteFamiliar"],
+    productionNotes: "VIDEO COMERCIAL — Jornada de grabación. ÁNGULO: restaurante familiar + significado Chorotega (casa/choza). Tomas: familia compartiendo mesa, manos sirviendo, ambiente acogedor, letrero NANKU. Narración en off o texto en pantalla. Música ambient tropical. Josu Frames. IMPORTANTE: NO usar el ángulo 'nació en la selva' — narrativa incorrecta según el cliente.",
     status: "pending"
   },
   /* ── SEMANA 2: REELS DE PRODUCTO (Diseño + Producción) ──────────────── */
@@ -1786,11 +1792,11 @@ const posts = [
     postType: "filming",
     hook: "Detrás de cada reseña perfecta, hay una persona con nombre.",
     engagement: "Jason, Manuel, Tato, Gustavo — ¿cuál del equipo te atendió? Mencionálos en los comentarios 👇",
-    captionES: "Jason. Manuel. Tato. Gustavo.\n\nCuatro nombres que aparecen una y otra vez en las reseñas de visitantes de EE.UU., Europa, Latinoamérica.\n\nNo es casualidad. Es cultura de equipo.\n\nEn Nanku, el servicio no es un protocolo — es personal.\n\nY detrás de ese servicio hay una historia que nació en la selva.\n\nEste restaurante comenzó en medio de la jungla costarricense. Hoy está en el corazón de La Fortuna — con el mismo equipo, la misma alma.\n\nVení a conocerlos. Reservá en el link de bio.",
-    captionEN: "Jason. Manuel. Tato. Gustavo.\n\nFour names that appear again and again in reviews from the US, Europe, Latin America.\n\nNot a coincidence. It's team culture.\n\nAt Nanku, service isn't a script — it's personal.\n\nAnd behind that service is a story born in the jungle.\n\nThis restaurant started in the Costa Rican rainforest. Today it stands at the heart of La Fortuna — same team, same soul.\n\nCome meet them. Book via link in bio.",
+    captionES: "Jason. Manuel. Tato. Gustavo.\n\nCuatro nombres que aparecen una y otra vez en las reseñas de visitantes de EE.UU., Europa, Latinoamérica.\n\nNo es casualidad. Es cultura de equipo.\n\nEn Nanku, el servicio no es un protocolo — es personal. Es familiar. Es lo que hace que un restaurante se sienta como casa.\n\nY eso es exactamente lo que Nanku quiso ser desde el primer día: un lugar que acoge.\n\nVení a conocerlos. Reservá en el link de bio.",
+    captionEN: "Jason. Manuel. Tato. Gustavo.\n\nFour names that appear again and again in reviews from the US, Europe, Latin America.\n\nNot a coincidence. It's team culture.\n\nAt Nanku, service isn't a script — it's personal. It's family. It's what makes a restaurant feel like home.\n\nAnd that's exactly what Nanku set out to be from day one: a place that welcomes.\n\nCome meet them. Book via link in bio.",
     cta: "Reservá — link en bio",
     hashtags: ["#NankuRestaurante","#LaFortuna","#CostaRicaHospitality","#TeamNanku","#BehindTheScenes","#PuraVida","#VisitCostaRica","#ArenalVolcano"],
-    productionNotes: "BTS (Jornada grabación). ÁNGULO: staff + origen en la selva. Video de Jason, Manuel, Tato y Gustavo en acción (sirviendo, preparando, saludando). Nombres en pantalla. Auténtico, íntimo. Combinar con tomas del rancho y palapa.",
+    productionNotes: "BTS (Jornada grabación). ÁNGULO: staff como corazón del restaurante familiar. Video de Jason, Manuel, Tato y Gustavo en acción (sirviendo, preparando, saludando). Nombres en pantalla. Auténtico, íntimo. El dueño también puede aparecer. IMPORTANTE: NO referenciar origen en la selva.",
     status: "pending"
   },
   {
@@ -1812,13 +1818,13 @@ const posts = [
     platforms: ["instagram", "tiktok"],
     format: "Reel 20s", pillar: "producto",
     postType: "filming",
-    hook: "El plato que no está en el menú pero todo el mundo pide.",
-    engagement: "¿Ya sabías de este especial? Etiquetá a alguien que tiene que venir a probarlo 👇",
-    captionES: "Hay cosas que solo sabés si venís.\n\nNuestro coconut shrimp es el plato más mencionado en las reseñas de visitantes de todo el mundo — y no lo vas a encontrar en el menú oficial.\n\nEs un especial. Aparece cuando aparece. Preguntá a tu mesero.\n\nUna razón más para reservar y venir a ver qué hay.\n\nLink en bio.",
-    captionEN: "Some things you only know if you show up.\n\nOur coconut shrimp is the most mentioned dish in reviews from visitors around the world — and you won't find it on the official menu.\n\nIt's a special. It appears when it appears. Ask your server.\n\nOne more reason to book and come find out what's on.\n\nLink in bio.",
+    hook: "¿Sabías que nuestro plato más vendido no está en el menú?",
+    engagement: "Etiquetá a alguien que tiene que venir a probarlo 👇 · ¿Ya lo pediste? Contanos en los comentarios",
+    captionES: "Hay cosas que solo sabés si venís.\n\nLos Camarones Malibu son el plato más mencionado en las reseñas de visitantes de todo el mundo — y no los vas a encontrar en el menú oficial.\n\nEs un especial del día. Intencionalmente.\n\nPreguntá a tu salonero cuando llegués.\n\nUna razón más para reservar y venir a descubrir qué hay.\n\nLink en bio.",
+    captionEN: "Some things you only know if you show up.\n\nThe Camarones Malibu are the most mentioned dish in reviews from visitors around the world — and you won't find them on the official menu.\n\nThey're a daily special. Intentionally.\n\nAsk your server when you arrive.\n\nOne more reason to book and come find out what's on.\n\nLink in bio.",
     cta: "Reservá y descubrí — link en bio",
-    hashtags: ["#NankuRestaurante","#LaFortuna","#SecretMenu","#CoconutShrimp","#CostaRicaFood","#Foodie","#ArenalVolcano","#HiddenGem"],
-    productionNotes: "REEL (Jornada grabación). NOTA CRÍTICA: confirmar con el cliente si el coconut shrimp existe como especial rotativo ANTES de publicar. Si está disponible → video del plato real en preparación. Si no → ajustar copy a 'especiales del chef'.",
+    hashtags: ["#NankuRestaurante","#LaFortuna","#CamaronesMalibu","#SecretMenu","#CostaRicaFood","#Foodie","#ArenalVolcano","#HiddenGem"],
+    productionNotes: "REEL (Jornada grabación). PLATO CONFIRMADO: Camarones Malibu — especial activo, el más vendido, intencionalmente fuera del menú. Video real de preparación del plato. Tomas close-up de los camarones. El salonero presentando el especial. ÁNGULO: 'el plato secreto de Nanku'.",
     status: "pending"
   },
   {
@@ -2051,9 +2057,10 @@ function buildCalendar() {
   for (let d = 1; d <= 31; d++) {
     cells.push({ date: `2026-05-${String(d).padStart(2,'0')}`, inMonth: true, day: d, monthLabel: 'MAY' });
   }
-  // Jun 1-2
-  cells.push({ date: '2026-06-01', inMonth: false, day: 1, monthLabel: 'JUN' });
-  cells.push({ date: '2026-06-02', inMonth: false, day: 2, monthLabel: 'JUN' });
+  // Jun 1-7 (complete last row)
+  for (let d = 1; d <= 7; d++) {
+    cells.push({ date: `2026-06-${String(d).padStart(2,'0')}`, inMonth: false, day: d, monthLabel: 'JUN' });
+  }
 
   const fp = getFilteredPosts();
   const fpDates = new Set(fp.map(p => p.date));
@@ -2103,7 +2110,10 @@ function buildCalendar() {
       </div>`;
     });
     if (dayPosts.length === 0 && cell.inMonth) {
-      previewHTML = `<div class="empty-day">—</div>`;
+      const isFuture = cell.date > TODAY;
+      previewHTML = isFuture
+        ? `<div class="empty-day">Sin post planeado</div>`
+        : `<div class="empty-day">—</div>`;
     }
 
     div.innerHTML = `
