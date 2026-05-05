@@ -345,6 +345,7 @@
   .status-production { background: #f0a500; }
   .status-ready { background: var(--color-success); }
   .status-published { background: var(--color-success); opacity: 0.6; }
+  .status-skipped { background: #c0392b; }
 
   /* ─── LISTA VIEW ─────────────────────────────────────── */
   .list-view {
@@ -355,7 +356,7 @@
 
   .list-item {
     display: grid;
-    grid-template-columns: 140px 100px 120px 1fr 120px;
+    grid-template-columns: 140px 100px 120px 1fr 120px 72px;
     gap: 16px;
     align-items: center;
     padding: 14px 20px;
@@ -956,15 +957,91 @@
     text-transform: uppercase;
   }
 
+  /* ─── CHECK-IN BUTTONS (vista lista) ────────────────────── */
+  .checkin-btns {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+  .checkin-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text-muted);
+  }
+  .checkin-yes:hover, .checkin-yes.active {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: #000;
+  }
+  .checkin-no:hover, .checkin-no.active {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: #fff;
+  }
+  .list-item.status-is-published .checkin-yes { background: var(--color-success); border-color: var(--color-success); color: #000; }
+  .list-item.status-is-skipped  .checkin-no  { background: #c0392b; border-color: #c0392b; color: #fff; }
+  .list-item.status-is-skipped { opacity: 0.5; }
+
+  /* ─── EDITABLE FIELDS (modal) ────────────────────────────── */
+  [contenteditable] {
+    outline: none;
+    border-radius: 2px;
+    transition: background 0.12s ease, box-shadow 0.12s ease;
+    cursor: text;
+  }
+  [contenteditable]:hover { background: rgba(255,255,255,0.04); }
+  [contenteditable]:focus { background: rgba(255,255,255,0.06); box-shadow: 0 0 0 1px rgba(255,107,43,0.35); }
+  .editable-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 13px;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 0;
+    cursor: text;
+    transition: background 0.12s ease;
+  }
+  .editable-textarea:hover { background: rgba(255,255,255,0.03); }
+  .editable-textarea:focus { background: rgba(255,255,255,0.05); box-shadow: 0 0 0 1px rgba(255,107,43,0.25); outline: none; }
+  .edit-hint {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
   /* ─── IMPROVED LIST RESPONSIVE ───────────────────────────── */
   @media (max-width: 1100px) {
-    .list-item { grid-template-columns: 130px 90px 110px 1fr; }
+    .list-item { grid-template-columns: 130px 90px 110px 1fr 72px; }
     .list-pillar { display: none; }
   }
   @media (max-width: 700px) {
-    .list-item { grid-template-columns: 70px 1fr; gap: 10px; padding: 12px 14px; position: relative; }
+    .list-item { grid-template-columns: 70px 1fr 64px; gap: 10px; padding: 12px 14px; position: relative; }
     .list-format, .list-pillar { display: none; }
-    .list-platform-badges { position: absolute; top: 12px; right: 14px; }
+    .list-platform-badges { position: absolute; top: 12px; right: 90px; }
   }
 
   /* ─── POSDATA SECTION ────────────────────────────────────── */
@@ -1330,6 +1407,7 @@ const STATUS_META = {
   production: { label: "En producción",  dotClass: "status-production" },
   ready:      { label: "Listo",          dotClass: "status-ready" },
   published:  { label: "Publicado",      dotClass: "status-published" },
+  skipped:    { label: "No publicado",   dotClass: "status-skipped" },
 };
 
 // ─── PAQUETE PRESENCIA ACTIVA — $600 USD/mes ─────────────────────────────────
@@ -1771,16 +1849,39 @@ function buildList() {
 
   fp.forEach(p => {
     const div = document.createElement('div');
-    div.className = 'list-item';
     const status = state.postStatuses[p.id];
+    div.className = `list-item status-is-${status}`;
+
     div.innerHTML = `
       <div class="list-date"><span class="status-dot ${STATUS_META[status]?.dotClass}"></span>${shortDate(p.date)} · ${formatDate(p.date).split(',')[0]}</div>
       <div class="list-platform-badges">${p.platforms.map(platformBadge).join('')}</div>
       <div class="list-format">${p.format}</div>
       <div class="list-hook">${p.hook}</div>
       <div class="list-pillar ${p.pillar}">${PILLAR_META[p.pillar]?.label}</div>
+      <div class="checkin-btns">
+        <button class="checkin-btn checkin-yes" title="Publicado ✓" data-id="${p.id}" data-action="published">✓</button>
+        <button class="checkin-btn checkin-no"  title="No publicado ✗" data-id="${p.id}" data-action="skipped">✗</button>
+      </div>
     `;
-    div.addEventListener('click', () => openModal(p.date, p.id));
+
+    // Open modal on row click (not on buttons)
+    div.addEventListener('click', (e) => {
+      if (!e.target.closest('.checkin-btn')) openModal(p.date, p.id);
+    });
+
+    // Check-in button handlers
+    div.querySelectorAll('.checkin-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        const current = state.postStatuses[id];
+        // Toggle: click same button again → back to pending
+        state.postStatuses[id] = (current === action) ? 'pending' : action;
+        renderViews();
+      });
+    });
+
     container.appendChild(div);
   });
 }
@@ -1899,16 +2000,17 @@ function renderModalBody(post) {
       <span class="format-tag">${post.format}</span>
       <span class="pillar-tag ${post.pillar}">${PILLAR_META[post.pillar]?.label}</span>
       ${post.postType === 'filming' ? '<span class="posttype-filming">🎬 Filmación</span>' : post.postType === 'design' ? '<span class="posttype-design">🎨 Diseño</span>' : ''}
+      <span class="edit-hint" style="margin-left:auto;">✏️ campos editables</span>
     </div>
 
-    <div class="modal-hook">${post.hook}</div>
+    <div class="modal-hook" contenteditable="true" id="editHook-${post.id}" spellcheck="false">${escapeHTML(post.hook)}</div>
 
     ${post.engagement ? `
     <div class="engagement-block">
       <span class="engagement-icon">💬</span>
       <div style="flex:1;min-width:0;">
         <div class="engagement-label">Engagement · Acción del público</div>
-        <div class="engagement-text">${post.engagement}</div>
+        <div class="engagement-text" contenteditable="true" id="editEngagement-${post.id}" spellcheck="false">${escapeHTML(post.engagement)}</div>
       </div>
     </div>
     ` : ''}
@@ -1921,7 +2023,9 @@ function renderModalBody(post) {
         </div>
         <span class="caption-chevron">▲</span>
       </button>
-      <div class="caption-content visible" id="captionES-${post.id}" style="border-left:3px solid rgba(255,107,43,0.3);margin-left:0;">${escapeHTML(post.captionES)}</div>
+      <div class="caption-content visible" id="captionES-${post.id}" style="border-left:3px solid rgba(255,107,43,0.3);margin-left:0;padding:12px 16px;">
+        <textarea class="editable-textarea" id="textES-${post.id}" spellcheck="false">${escapeHTML(post.captionES)}</textarea>
+      </div>
       <div class="caption-actions visible" id="actionsES-${post.id}">
         <button class="btn-copy" data-copy="${post.id}" data-lang="es">Copiar Caption ES</button>
       </div>
@@ -1935,7 +2039,9 @@ function renderModalBody(post) {
         </div>
         <span class="caption-chevron">▼</span>
       </button>
-      <div class="caption-content" id="captionEN-${post.id}" style="border-left:3px solid rgba(74,158,255,0.3);margin-left:0;">${escapeHTML(post.captionEN)}</div>
+      <div class="caption-content" id="captionEN-${post.id}" style="border-left:3px solid rgba(74,158,255,0.3);margin-left:0;padding:12px 16px;">
+        <textarea class="editable-textarea" id="textEN-${post.id}" spellcheck="false">${escapeHTML(post.captionEN)}</textarea>
+      </div>
       <div class="caption-actions" id="actionsEN-${post.id}">
         <button class="btn-copy" data-copy="${post.id}" data-lang="en">Copiar Caption EN</button>
       </div>
@@ -1943,7 +2049,7 @@ function renderModalBody(post) {
 
     <div class="modal-cta">
       <span class="cta-label">CTA</span>
-      <span class="cta-value">${post.cta}</span>
+      <span class="cta-value" contenteditable="true" id="editCta-${post.id}" spellcheck="false">${escapeHTML(post.cta)}</span>
     </div>
 
     <div>
@@ -1953,19 +2059,45 @@ function renderModalBody(post) {
 
     <div class="prod-notes">
       <div class="prod-notes-label">Notas de producción</div>
-      <div class="prod-notes-text">${escapeHTML(post.productionNotes)}</div>
+      <textarea class="editable-textarea prod-notes-text" id="editNotes-${post.id}" spellcheck="false" style="min-height:60px;">${escapeHTML(post.productionNotes)}</textarea>
     </div>
 
     <div class="status-row">
       <span class="status-label">Estado</span>
       <select class="status-select" id="statusSelect-${post.id}">
-        <option value="pending" ${status === 'pending' ? 'selected' : ''}>Pendiente</option>
+        <option value="pending"    ${status === 'pending'    ? 'selected' : ''}>Pendiente</option>
         <option value="production" ${status === 'production' ? 'selected' : ''}>En producción</option>
-        <option value="ready" ${status === 'ready' ? 'selected' : ''}>Listo</option>
-        <option value="published" ${status === 'published' ? 'selected' : ''}>Publicado</option>
+        <option value="ready"      ${status === 'ready'      ? 'selected' : ''}>Listo</option>
+        <option value="published"  ${status === 'published'  ? 'selected' : ''}>Publicado ✓</option>
+        <option value="skipped"    ${status === 'skipped'    ? 'selected' : ''}>No publicado ✗</option>
       </select>
     </div>
   `;
+
+  // Auto-resize textareas to content height
+  body.querySelectorAll('.editable-textarea').forEach(ta => {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+
+  // Save editable fields on input/blur back to posts array
+  const saveField = (id, field, getValue) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const save = () => { post[field] = getValue(el); };
+    el.addEventListener('input', save);
+    el.addEventListener('blur', save);
+  };
+  saveField(`editHook-${post.id}`,        'hook',            el => el.innerText.trim());
+  saveField(`editEngagement-${post.id}`,  'engagement',      el => el.innerText.trim());
+  saveField(`editCta-${post.id}`,         'cta',             el => el.innerText.trim());
+  saveField(`textES-${post.id}`,          'captionES',       el => el.value);
+  saveField(`textEN-${post.id}`,          'captionEN',       el => el.value);
+  saveField(`editNotes-${post.id}`,       'productionNotes', el => el.value);
 
   // Caption toggles
   ['ES','EN'].forEach(lang => {
@@ -1982,13 +2114,14 @@ function renderModalBody(post) {
     });
   });
 
-  // Copy buttons
+  // Copy buttons — reads from textarea value (reflects live edits)
   body.querySelectorAll('.btn-copy').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.copy;
       const lang = btn.dataset.lang;
-      const post = posts.find(p => p.id === id);
-      const text = lang === 'es' ? post.captionES : post.captionEN;
+      const taId = lang === 'es' ? `textES-${id}` : `textEN-${id}`;
+      const ta = document.getElementById(taId);
+      const text = ta ? ta.value : (lang === 'es' ? post.captionES : post.captionEN);
       navigator.clipboard.writeText(text).then(() => {
         const orig = btn.textContent;
         btn.textContent = 'Copiado!';
