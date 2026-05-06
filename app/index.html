@@ -1053,6 +1053,8 @@
     padding: 0;
     cursor: text;
     transition: background 0.12s ease;
+    min-height: 80px;
+    display: block;
   }
   .editable-textarea:hover { background: rgba(255,255,255,0.03); }
   .editable-textarea:focus { background: rgba(255,255,255,0.05); box-shadow: 0 0 0 1px rgba(255,107,43,0.25); outline: none; }
@@ -2530,7 +2532,7 @@ function openModal(date, postId = null) {
     body.appendChild(banner);
   }
 
-  // Render each post as an expandable card
+  // Render each post as an expandable card — append ALL to DOM first
   dayPosts.forEach((post, idx) => {
     const card = buildDayPostCard(post, idx === 0);
     body.appendChild(card);
@@ -2539,11 +2541,22 @@ function openModal(date, postId = null) {
   // If specific postId requested, open that card
   if (postId) {
     const target = body.querySelector(`[data-post-id="${postId}"]`);
-    if (target) target.classList.add('open');
+    if (target) { target.classList.add('open'); }
   }
 
   document.getElementById('modalBackdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // Render detail bodies AFTER cards are in DOM so scrollHeight is correct
+  requestAnimationFrame(() => {
+    body.querySelectorAll('.dpc.open .dpc-details').forEach(details => {
+      if (details.innerHTML.trim() === '') {
+        const pid = details.closest('.dpc').dataset.postId;
+        const post = posts.find(p => p.id === pid);
+        if (post) renderModalBody(post, details);
+      }
+    });
+  });
 }
 
 function buildDayPostCard(post, autoOpen) {
@@ -2590,9 +2603,7 @@ function buildDayPostCard(post, autoOpen) {
   header.addEventListener('click', toggle);
   expandBtn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
 
-  if (autoOpen) {
-    renderModalBody(post, details);
-  }
+  // renderModalBody for autoOpen is now called from openModal after DOM insertion
 
   return card;
 }
@@ -2702,13 +2713,19 @@ function renderModalBody(post, container) {
     </div>
   `;
 
-  // Auto-resize textareas to content height
+  // Auto-resize textareas — use rAF so element is painted and scrollHeight is correct
+  const resizeAll = () => {
+    body.querySelectorAll('.editable-textarea').forEach(ta => {
+      ta.style.height = 'auto';
+      const h = ta.scrollHeight;
+      ta.style.height = (h > 0 ? h : 80) + 'px';
+    });
+  };
+  requestAnimationFrame(resizeAll);
   body.querySelectorAll('.editable-textarea').forEach(ta => {
-    ta.style.height = 'auto';
-    ta.style.height = ta.scrollHeight + 'px';
     ta.addEventListener('input', () => {
       ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
+      ta.style.height = Math.max(ta.scrollHeight, 80) + 'px';
     });
   });
 
