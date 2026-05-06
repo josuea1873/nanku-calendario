@@ -326,12 +326,17 @@
     color: var(--color-text-muted);
     line-height: 1.3;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 2px 5px;
+    padding: 3px 6px;
     border-left: 2px solid;
     background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.12s;
+    cursor: pointer;
   }
+  .cal-post-pill:hover { background: rgba(255,255,255,0.06); }
   .pillar-producto { border-color: var(--color-accent); }
   .pillar-cultura { border-color: var(--color-tropical); }
   .pillar-ugc { border-color: var(--color-success); }
@@ -516,18 +521,22 @@
     border: 1px solid var(--color-border);
     width: 100%;
     max-width: 760px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
     position: relative;
     transform: translateY(20px);
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
     flex-shrink: 0;
   }
+  #modalBody { overflow-y: auto; flex: 1; }
   .modal-backdrop.open .modal { transform: translateY(0); }
 
   .modal-header {
-    padding: 20px 24px;
+    padding: 24px 28px 20px;
     border-bottom: 1px solid var(--color-border);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 16px;
     position: sticky;
@@ -536,25 +545,36 @@
     z-index: 2;
   }
   .modal-date {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .modal-day-meta {
     font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-text-muted);
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    color: var(--color-accent);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    margin-top: 6px;
+    font-weight: 700;
   }
   .modal-close {
-    width: 32px;
-    height: 32px;
     background: none;
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
     cursor: pointer;
-    font-size: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 7px 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
     transition: all 0.15s ease;
     flex-shrink: 0;
+    margin-top: 4px;
   }
   .modal-close:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
@@ -579,7 +599,7 @@
   }
   .modal-post-tab.active { color: var(--color-text); border-bottom-color: var(--color-accent); background: var(--color-bg-elevated); }
 
-  .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+  .modal-body { padding: 0; display: flex; flex-direction: column; gap: 0; }
 
   .modal-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
@@ -798,16 +818,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #3a3a3a;
+    color: #2e2e2e;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    flex: 1;
+    min-height: 40px;
+  }
+  .cal-post-more {
     font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.05em;
-    flex: 1;
-    text-transform: uppercase;
-    border: 1px dashed #1e1e1e;
-    margin: 4px;
-    border-radius: 2px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    padding: 2px 6px;
   }
+  .cpp-type { font-size: 9px; flex-shrink: 0; }
+  .cpp-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 
   /* ─── SCROLL BAR ─────────────────────────────────────── */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -1378,18 +1404,97 @@
     .posdata-foot { padding: 12px 16px; }
   }
 
-  /* ─── CURSOR GLOW ─────────────────────────────────────────── */
-  .cursor-glow {
+  /* ─── PARTICLE CANVAS (cursor) ──────────────────────────── */
+  #particleCanvas {
     pointer-events: none;
     position: fixed;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    transition: opacity 0.3s ease;
+    inset: 0;
+    z-index: 9998;
   }
+
+  /* ─── MAGNETIC BTN ───────────────────────────────────────── */
+  .mag-btn { transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94); }
+
+  /* ─── DAY DETAIL CARDS (modal list) ─────────────────────── */
+  .dpc {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0;
+    transition: background 0.15s;
+  }
+  .dpc:last-child { border-bottom: none; }
+  .dpc-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px 14px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .dpc-header:hover { background: rgba(255,255,255,0.02); }
+  .dpc-top { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; }
+  .dpc-badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .dpc-hook {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .dpc-engagement {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    padding: 8px 12px;
+    background: rgba(255,107,43,0.06);
+    border-left: 2px solid var(--color-accent);
+    margin: 0 24px 14px;
+  }
+  .dpc-expand {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--color-border);
+    background: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.15s;
+    border-radius: 2px;
+    margin-top: 2px;
+  }
+  .dpc-expand:hover, .dpc.open .dpc-expand { border-color: var(--color-accent); color: var(--color-accent); }
+  .dpc-details {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 0;
+  }
+  .dpc.open .dpc-details { display: block; }
+  .dpc.open { background: rgba(255,255,255,0.015); }
+  .dpc-chevron { transition: transform 0.2s; }
+  .dpc.open .dpc-chevron { transform: rotate(180deg); }
+
+  /* Modal header redesign */
+  .modal-day-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* Status pill in list row */
+  .list-item { transition: opacity 0.2s, background 0.15s; }
+  .list-item.status-is-skipped { opacity: 0.45; }
+  .list-item.status-is-published { border-left: 2px solid var(--color-success); }
 
 </style>
 </head>
@@ -1610,10 +1715,12 @@
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modal">
     <div class="modal-header">
-      <div class="modal-date" id="modalDate"></div>
-      <button class="modal-close" id="modalClose">✕</button>
+      <div>
+        <div class="modal-date" id="modalDate"></div>
+        <div class="modal-day-meta" id="modalDayMeta"></div>
+      </div>
+      <button class="modal-close" id="modalClose">× cerrar</button>
     </div>
-    <div id="modalPostTabs" class="modal-post-tabs"></div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
@@ -2099,21 +2206,27 @@ function buildCalendar() {
           : '';
     const numLabel = cell.inMonth ? cell.day : `<span style="font-size:9px;opacity:0.6;">${cell.monthLabel}</span> ${cell.day}`;
 
-    // Post previews
+    // Post previews — styled cards like AO Revolution but dark
     let previewHTML = '';
     const showPosts = filteredDayPosts.length > 0 ? filteredDayPosts : dayPosts;
-    showPosts.slice(0,3).forEach(p => {
+    showPosts.slice(0, 2).forEach(p => {
       const status = state.postStatuses[p.id];
-      const statusClass = `status-${status === 'pending' ? 'pending' : status === 'production' ? 'production' : status === 'ready' || status === 'published' ? 'ready' : 'pending'}`;
-      previewHTML += `<div class="cal-post-pill pillar-${p.pillar}">
-        <span class="status-dot ${statusClass}"></span>${p.hook.substring(0,38)}${p.hook.length > 38 ? '…' : ''}
+      const statusClass = STATUS_META[status]?.dotClass || 'status-pending';
+      const typeIcon = p.postType === 'filming' ? '🎬' : '🎨';
+      previewHTML += `<div class="cal-post-pill pillar-${p.pillar}" title="${escapeHTML(p.hook)}">
+        <span class="status-dot ${statusClass}"></span>
+        <span class="cpp-type">${typeIcon}</span>
+        <span class="cpp-text">${p.hook.substring(0,32)}${p.hook.length > 32 ? '…' : ''}</span>
       </div>`;
     });
+    if (showPosts.length > 2) {
+      previewHTML += `<div class="cal-post-more">+${showPosts.length - 2} más</div>`;
+    }
     if (dayPosts.length === 0 && cell.inMonth) {
-      const isFuture = cell.date > TODAY;
+      const isFuture = cell.date >= TODAY;
       previewHTML = isFuture
-        ? `<div class="empty-day">Sin post planeado</div>`
-        : `<div class="empty-day">—</div>`;
+        ? `<div class="empty-day">· · ·</div>`
+        : `<div class="empty-day" style="opacity:0.3;">—</div>`;
     }
 
     div.innerHTML = `
@@ -2163,17 +2276,23 @@ function buildList() {
       if (!e.target.closest('.checkin-btn')) openModal(p.date, p.id);
     });
 
-    // Check-in button handlers
+    // Check-in button handlers — mousedown for instant 1-click response
     div.querySelectorAll('.checkin-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('mousedown', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         const id = btn.dataset.id;
         const action = btn.dataset.action;
         const current = state.postStatuses[id];
-        // Toggle: click same button again → back to pending
-        state.postStatuses[id] = (current === action) ? 'pending' : action;
+        const newStatus = (current === action) ? 'pending' : action;
+        state.postStatuses[id] = newStatus;
         persistState();
-        renderViews();
+        // In-place update — no full rebuild
+        div.className = `list-item status-is-${newStatus}`;
+        const dot = div.querySelector('.status-dot');
+        if (dot) dot.className = `status-dot ${STATUS_META[newStatus]?.dotClass || 'status-pending'}`;
+        buildCalendar();
+        updateStats();
       });
     });
 
@@ -2387,74 +2506,110 @@ function buildCampanas() {
 }
 
 // ─── MODAL ───────────────────────────────────────────────────────────────────
-let currentModalDate = null;
-let currentModalPostId = null;
-
 function openModal(date, postId = null) {
-  currentModalDate = date;
   const dayPosts = posts.filter(p => p.date === date);
   if (dayPosts.length === 0) return;
 
-  currentModalPostId = postId || dayPosts[0].id;
+  document.getElementById('modalDate').textContent = formatDate(date).toUpperCase();
+  const music = LIVE_MUSIC[date];
+  const metaParts = [];
+  if (dayPosts.length > 1) metaParts.push(`${dayPosts.length} piezas de contenido`);
+  else metaParts.push('1 pieza de contenido');
+  if (music) metaParts.push('música en vivo · 7 PM');
+  document.getElementById('modalDayMeta').textContent = metaParts.join(' · ');
 
-  const backdrop = document.getElementById('modalBackdrop');
-  document.getElementById('modalDate').textContent = formatDate(date);
+  const body = document.getElementById('modalBody');
+  body.innerHTML = '';
 
-  // Tabs
-  const tabsEl = document.getElementById('modalPostTabs');
-  tabsEl.innerHTML = '';
-  if (dayPosts.length > 1) {
-    dayPosts.forEach((p, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'modal-post-tab' + (p.id === currentModalPostId ? ' active' : '');
-      btn.textContent = `Post ${i+1} · ${p.format}`;
-      btn.addEventListener('click', () => {
-        currentModalPostId = p.id;
-        document.querySelectorAll('.modal-post-tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        renderModalBody(p);
-      });
-      tabsEl.appendChild(btn);
-    });
+  // Music banner
+  if (music) {
+    const banner = document.createElement('div');
+    banner.style.cssText = 'background:rgba(167,139,250,0.08);border-bottom:1px solid rgba(167,139,250,0.2);padding:12px 24px;display:flex;gap:10px;align-items:center;';
+    banner.innerHTML = `<span style="background:var(--color-music);width:7px;height:7px;border-radius:50%;flex-shrink:0;"></span>
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-music);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;">Noche de Música en Vivo · ${music.day} · 7 PM</span>`;
+    body.appendChild(banner);
   }
 
-  const post = dayPosts.find(p => p.id === currentModalPostId) || dayPosts[0];
-  renderModalBody(post);
-  backdrop.classList.add('open');
+  // Render each post as an expandable card
+  dayPosts.forEach((post, idx) => {
+    const card = buildDayPostCard(post, idx === 0);
+    body.appendChild(card);
+  });
+
+  // If specific postId requested, open that card
+  if (postId) {
+    const target = body.querySelector(`[data-post-id="${postId}"]`);
+    if (target) target.classList.add('open');
+  }
+
+  document.getElementById('modalBackdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function renderModalBody(post) {
-  const body = document.getElementById('modalBody');
+function buildDayPostCard(post, autoOpen) {
   const status = state.postStatuses[post.id];
-  const music = LIVE_MUSIC[post.date];
+  const card = document.createElement('div');
+  card.className = 'dpc' + (autoOpen ? ' open' : '');
+  card.dataset.postId = post.id;
 
-  const musicNote = music ? `
-    <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.3);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
-      <span style="background:var(--color-music);width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;margin-top:3px;"></span>
-      <div style="flex:1;min-width:0;">
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--color-music);font-weight:700;letter-spacing:0.08em;">
-          MÚSICA EN VIVO · ${music.day.toUpperCase()} · 7 PM
+  const typeBadge = post.postType === 'filming'
+    ? `<span class="posttype-filming" style="font-size:9px;padding:2px 6px;">🎬 Filmación</span>`
+    : `<span class="posttype-design" style="font-size:9px;padding:2px 6px;">🎨 Diseño</span>`;
+
+  card.innerHTML = `
+    <div class="dpc-header">
+      <div class="dpc-top">
+        <div class="dpc-badges">
+          <span class="format-tag">${post.format}</span>
+          ${post.platforms.map(platformBadge).join('')}
+          <span class="pillar-tag ${post.pillar}">${PILLAR_META[post.pillar]?.label}</span>
+          ${typeBadge}
         </div>
-        <div style="font-family:var(--font-mono);font-size:10px;color:rgba(167,139,250,0.55);margin-top:5px;line-height:1.5;">
-          Artista de esta noche: <strong style="color:rgba(167,139,250,0.9);">pendiente — consultar con el cliente</strong><br>
-          Roster disponible: Esteban Calero · Paco De María · Chalo Gonzales · Chris Charía · Bryan Villalobos · Nathan Bolívar · Andrés Rojas
-        </div>
+        <div class="dpc-hook">${escapeHTML(post.hook)}</div>
       </div>
+      <button class="dpc-expand" title="Ver detalle">
+        <span class="dpc-chevron">▾</span>
+      </button>
     </div>
-  ` : '';
+    ${post.engagement ? `<div class="dpc-engagement">💬 ${escapeHTML(post.engagement)}</div>` : ''}
+    <div class="dpc-details"></div>
+  `;
+
+  const header = card.querySelector('.dpc-header');
+  const expandBtn = card.querySelector('.dpc-expand');
+  const details = card.querySelector('.dpc-details');
+
+  const toggle = () => {
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open');
+    if (!isOpen && details.innerHTML.trim() === '') {
+      renderModalBody(post, details);
+    }
+  };
+
+  header.addEventListener('click', toggle);
+  expandBtn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+
+  if (autoOpen) {
+    renderModalBody(post, details);
+  }
+
+  return card;
+}
+
+function renderModalBody(post, container) {
+  const body = container || document.getElementById('modalBody');
+  const status = state.postStatuses[post.id];
+
+  const editHint = `<span class="edit-hint" style="font-family:var(--font-mono);font-size:9px;color:var(--color-text-muted);letter-spacing:0.08em;text-transform:uppercase;">✏️ editá cualquier campo</span>`;
 
   body.innerHTML = `
-    ${musicNote}
-    <div class="modal-badges">
-      ${post.platforms.map(platformBadge).join('')}
-      <span class="format-tag">${post.format}</span>
-      <span class="pillar-tag ${post.pillar}">${PILLAR_META[post.pillar]?.label}</span>
-      ${post.postType === 'filming' ? '<span class="posttype-filming">🎬 Filmación</span>' : post.postType === 'design' ? '<span class="posttype-design">🎨 Diseño</span>' : ''}
-      <span class="edit-hint" style="margin-left:auto;">✏️ campos editables</span>
-    </div>
+    <div style="padding:14px 0 10px;">${editHint}</div>
 
-    <div class="modal-hook" contenteditable="true" id="editHook-${post.id}" spellcheck="false">${escapeHTML(post.hook)}</div>
+    <div style="margin-bottom:8px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Hook</div>
+      <div class="modal-hook" contenteditable="true" id="editHook-${post.id}" spellcheck="false" style="font-size:15px;">${escapeHTML(post.hook)}</div>
+    </div>
 
     ${post.engagement ? `
     <div class="engagement-block">
@@ -2751,24 +2906,94 @@ document.querySelectorAll('.month-btn').forEach(btn => {
 buildCalendar();
 updateStats();
 </script>
-<div class="cursor-glow" id="cursorGlow"></div>
+<canvas id="particleCanvas"></canvas>
 <script>
-  // Cursor glow follow
-  const glow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top  = e.clientY + 'px';
-  });
-  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
-  document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
+// ─── FIRE PARTICLE CURSOR ─────────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = window.innerWidth, H = window.innerHeight;
+  canvas.width = W; canvas.height = H;
+  canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9998;';
 
-  // Pulse animation on calendar day hover
-  document.addEventListener('mouseover', e => {
-    const day = e.target.closest('.cal-day:not(.other-month):not(.past)');
-    if (day && !day._pulseAdded) {
-      day._pulseAdded = true;
+  window.addEventListener('resize', () => {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+  });
+
+  const particles = [];
+  let mx = -999, my = -999, active = false, raf = null;
+
+  const COLORS = ['#ff6b2b','#ff8a3d','#ffaa60','#ff4500','#ffd580','#ff3300'];
+
+  class Ember {
+    constructor(x, y) {
+      this.x = x + (Math.random() - 0.5) * 8;
+      this.y = y + (Math.random() - 0.5) * 8;
+      this.vx = (Math.random() - 0.5) * 1.6;
+      this.vy = -(Math.random() * 2.2 + 0.8);
+      this.life = 1;
+      this.decay = Math.random() * 0.025 + 0.018;
+      this.r = Math.random() * 3 + 1;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += 0.04;
+      this.vx *= 0.98;
+      this.life -= this.decay;
+      this.r *= 0.97;
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.life) * 0.85;
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = this.r * 3;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, Math.max(0.1, this.r), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw();
+      if (particles[i].life <= 0) particles.splice(i, 1);
+    }
+    if (particles.length > 0) { raf = requestAnimationFrame(loop); }
+    else { raf = null; }
+  }
+
+  let lastSpawn = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const now = performance.now();
+    if (now - lastSpawn > 22) {
+      lastSpawn = now;
+      const count = 3;
+      for (let i = 0; i < count; i++) particles.push(new Ember(mx, my));
+      if (!raf) raf = requestAnimationFrame(loop);
     }
   });
+
+  // Magnetic effect on interactive elements
+  document.addEventListener('mouseover', e => {
+    const btn = e.target.closest('.checkin-btn, .view-tab, .month-btn, .chip, .modal-close');
+    if (btn) {
+      // Spawn a burst when entering a button
+      for (let i = 0; i < 6; i++) {
+        const r = btn.getBoundingClientRect();
+        particles.push(new Ember(r.left + r.width/2, r.top + r.height/2));
+      }
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+  });
+})();
 </script>
 </body>
 </html>
